@@ -1,0 +1,16 @@
+{
+  "name": "logicguess",
+  "version": "1.0.0",
+  "description": "A really simple logic game made mainly with React.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Alexander Dominguez Rendon",
+  "license": "MIT",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "mongodb": "^3.1.1"
+  }
+}
