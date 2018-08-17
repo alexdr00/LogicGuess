@@ -1,0 +1,91 @@
+.navigation {
+  display: flex;
+  flex-flow: column wrap;
+  justify-content: center;
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 8rem;
+  background-color: $indigo;
+
+  &__item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 100%;
+    background-color: darken($indigo, 20);
+    margin: 2rem 0;
+    height: 9rem;
+    position: relative;
+
+    // When the item is hovered show tag
+    &--home:hover .navigation__tag--home {
+      left: 90%;
+    }
+    &--manual:hover .navigation__tag--manual {
+      left: 90%;
+    }
+    &--play:hover .navigation__tag--play {
+      left: 90%;
+    }
+
+    // When the item is hovered its color
+    &--home:hover .navigation__icon--home {
+      color: $blue;
+    }
+    &--manual:hover .navigation__icon--manual {
+      color: $cyan;
+    }
+    &--play:hover .navigation__icon--play {
+      color: $teal;
+    }
+  }
+
+  &__tag {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    width: 20rem;
+    height: 6.5rem;
+    font-size: 2.3rem;
+    font-weight: 700;
+    text-align: center;
+    color: $colorWhite;
+    border-radius: 6px;
+    z-index: -1;
+    transition: all .3s;
+    left: -200%;
+
+    &--home {
+      background-color: $blue;
+    }
+    &--manual {
+      background-color: $cyan;
+    }
+    &--play {
+      background-color: $teal;
+    }
+  }
+
+  &__icon {
+    font-size: 5rem;
+    transition: color .3s;
+    // Inactive
+    color: $colorWhite;
+
+    &--home--active > *:not(.navigation__tag) {
+      color: $blue;
+    }
+    &--manual--active > *:not(.navigation__tag) {
+      color: $cyan;
+    }
+    &--play--active > *:not(.navigation__tag) {
+      color: $teal;
+    }
+  }
+}
+
