@@ -1,13 +1,13 @@
 .navigation {
-  display: flex;
-  flex-flow: column wrap;
-  justify-content: center;
-  position: absolute;
-  left: 0;
+  @include centerItems;
+  flex: 1 1 1;
+
+  position: fixed;
   top: 0;
   bottom: 0;
-  width: 8rem;
-  background-color: $indigo;
+  left: 0;
+  width: $sidebarWidth;
+  background-color: $navColor;
 
   &__item {
     display: flex;
@@ -15,12 +15,11 @@
     justify-content: center;
 
     width: 100%;
-    background-color: darken($indigo, 20);
+    background-color: darken($navColor, 15);
     margin: 2rem 0;
     height: 9rem;
     position: relative;
-
-    // When the item is hovered show tag
+    // When the item is hovered, show tag
     &--home:hover .navigation__tag--home {
       left: 90%;
     }
@@ -31,15 +30,15 @@
       left: 90%;
     }
 
-    // When the item is hovered its color
+    // When the item is hovered, change its color
     &--home:hover .navigation__icon--home {
-      color: $blue;
+      color: $homeIconColor;
     }
     &--manual:hover .navigation__icon--manual {
-      color: $cyan;
+      color: $manualIconColor;
     }
     &--play:hover .navigation__icon--play {
-      color: $teal;
+      color: $playIconColor;
     }
   }
 
@@ -56,18 +55,18 @@
     text-align: center;
     color: $colorWhite;
     border-radius: 6px;
-    z-index: -1;
     transition: all .3s;
     left: -200%;
+    z-index: -1;
 
     &--home {
-      background-color: $blue;
+      background-color: $homeIconColor;
     }
     &--manual {
-      background-color: $cyan;
+      background-color: $manualIconColor;
     }
     &--play {
-      background-color: $teal;
+      background-color: $playIconColor;
     }
   }
 
@@ -78,13 +77,13 @@
     color: $colorWhite;
 
     &--home--active > *:not(.navigation__tag) {
-      color: $blue;
+      color: $homeIconColor;
     }
     &--manual--active > *:not(.navigation__tag) {
-      color: $cyan;
+      color: $manualIconColor;
     }
     &--play--active > *:not(.navigation__tag) {
-      color: $teal;
+      color: $playIconColor;
     }
   }
 }

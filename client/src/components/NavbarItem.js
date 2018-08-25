@@ -5,6 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 class NavbarItem extends Component {
   render() {
     return (
+      // Nav Item
       <NavLink
         exact
         to={this.props.route}

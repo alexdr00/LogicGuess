@@ -1,8 +1,14 @@
 @import 'abstracts/variables';
+@import 'abstracts/mixins';
 
 @import 'vendors/bootstrap';
 
 @import 'base/base';
+@import 'base/animations';
 @import 'base/typography';
 
-@import 'components/navbar';
+@import 'layout/general';
+@import 'layout/navbar';
+@import 'layout/footer';
+
+@import 'pages/game';

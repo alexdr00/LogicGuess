@@ -1,14 +1,12 @@
 import React, { Component } from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 
-import { connect } from 'react-redux';
-import * as actions from '../actions';
-
 // Components
 import Navbar from './NavbarContainer';
 import Home from '../components/Home';
 import Manual from '../components/Manual';
-import Game from '../components/Game';
+import Game from './Game';
+import Footer from '../components/Footer';
 
 // Font awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -19,18 +17,17 @@ library.add(fas);
 class App extends Component {
   render() {
     return (
-      <div className="app-container">
-        <BrowserRouter>
-          <div>
-            <Navbar></Navbar>
+      <BrowserRouter>
+        <div className="app-container">
+          <Navbar></Navbar>
 
-            <Route exact path="/" component={Home}/>
-            <Route exact path="/manual" component={Manual} />
-            <Route exact path="/game" component={Game}/>
+          <Route exact path="/" component={Home}/>
+          <Route exact path="/manual" component={Manual} />
+          <Route exact path="/game" component={Game}/>
 
-          </div>
-        </BrowserRouter>
-      </div>
+          <Footer></Footer>
+        </div>
+      </BrowserRouter>
     );
   }
 }

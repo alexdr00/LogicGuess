@@ -1,0 +1,20 @@
+.app-container {
+  // Footer always on bottom
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+
+  font-size: 1.6rem;
+}
+
+.main-content {
+  // Footer always on bottom
+  flex: 1;
+
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  // Same as sidebar (just on desktop) + margin
+  margin-left: $sidebarWidth + 3rem;
+  margin-right: 3rem;
+}
