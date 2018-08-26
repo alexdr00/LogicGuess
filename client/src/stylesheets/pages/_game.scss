@@ -7,44 +7,24 @@
   min-height: 90vh;
   position: relative;
 
-  &__level-box {
-    padding: 10px;
-    cursor: pointer;
-    background-color: white;
+  &__level {
+    align-self: center;
   }
+}
 
-  &__choose-level {
-    position: absolute;
-    z-index: 100;
-    left: 0;
-    right: 0;
-    border-radius: 10px;
-    background-color: $manualIconColor;
-    box-shadow: 2px 15px 50px $lightGrayColor;
-    animation-duration: 1.5s;
+// Placing components on page
+.inputs-box {
+  display: flex;
+  flex-direction: column;
+}
 
-    &--shown {
-      top: 5%;
-      bottom: 5%;
-      animation-name: showLevelBox;
-    }
-
-    &--hidden {
-      top: -100%;
-      bottom: 100%;
-      animation-name: hideLevelBox;
-      animation-fill-mode: forwards;
-    }
-  }
+.status-box {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: space-between;
 
   &__status {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    justify-content: space-between;
-  }
-
-  &__status-container {
     position: relative;
   }
 
@@ -54,44 +34,26 @@
     top: 250%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+}
 
-    padding: 1rem 1.7rem;
-    color: white;
-    background-color: green;
-    border-radius: 50%;
+.levels-box {
+  position: absolute;
+  z-index: 100;
+  left: 0;
+  right: 0;
+  animation-duration: 1.5s;
+
+  &--shown {
+    top: 5%;
+    bottom: 5%;
+    animation-name: showLevelBox;
   }
 
-  &__level {
-    align-self: center;
+  &--hidden {
+    top: -100%;
+    bottom: 100%;
+    animation-name: hideLevelBox;
+    animation-fill-mode: forwards;
   }
-
-  &__inputs-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  &__inputs-button {
-    align-self: center;
-    margin-bottom: 4rem;
-  }
-
-  &__inputs {
-    align-self: center;
-    margin: 4rem 0;
-  }
-
-  &__digit-input {
-    width: 5rem;
-    padding: .5rem;
-    border-radius: 5px;
-    margin-right: 1rem;
-    border: 3px solid $homeIconColor;
-    text-align: center;
-    font-size: 2.5rem;
-
-    &:focus {
-      outline: none;
-    }
-  }
-
 }

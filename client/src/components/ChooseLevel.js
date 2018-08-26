@@ -1,37 +1,34 @@
 import React from 'react';
+import LevelButton from './LevelButton';
 
 const ChooseLevelBox = (props) => {
   const componentStatus = props.show ? 'shown' : 'hidden';
 
   return (
-    <div className={`game__choose-level game__choose-level--${componentStatus}`}>
-      <button
-        className="game__level-box"
-        onClick={() => props.onLevelChoose('facil')}
-      >
-        Fácil
-      </button>
+    <div className={`levels-box levels-box--${componentStatus}`}>
+      <LevelButton
+        onClick={props.onLevelChoose}
+        buttonText="Fácil"
+        level="easy"
+      />
 
-      <button
-        className="game__level-box"
-        onClick={() => props.onLevelChoose('moderado')}
-      >
-        Moderado
-      </button>
+      <LevelButton
+        onClick={props.onLevelChoose}
+        buttonText="Moderado"
+        level="moderate"
+      />
 
-      <button
-        className="game__level-box"
-        onClick={() => props.onLevelChoose('dificil')}
-      >
-        Difícil
-      </button>
+      <LevelButton
+        onClick={props.onLevelChoose}
+        buttonText="Difícil"
+        level="hard"
+      />
 
-      <button
-        className="game__level-box"
-        onClick={() => props.onLevelChoose('loteria')}
-      >
-        Lotería
-      </button>
+      <LevelButton
+        onClick={props.onLevelChoose}
+        buttonText="Lotería"
+        level="lottery"
+      />
 
     </div>
   );

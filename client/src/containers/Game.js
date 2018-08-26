@@ -12,17 +12,18 @@ class Game extends Component {
 
     this.state = {
       attempts: 0,
-      level: null,
       digitsGuessed: null,
       placementsGuessed: null,
+      level: null,
       numberToGuess: null,
       quantityOfDigits: null,
+      isLotteryLevel: null
     }
   }
 
   /**
-   * Sets up the game basic data to start playing based
-   * on the level chosen
+   * Sets up the game basic data to start playing.
+   * based on the level chosen
    * @param {string} level - level chosen by player
    */
   handleLevelChoose(level) {
@@ -33,11 +34,12 @@ class Game extends Component {
       level,
       numberToGuess,
       quantityOfDigits,
+      isLotteryLevel: level === 'lottery' ? true : false,
     });
   }
 
   /**
-   * Shows the user the level box where he can choose a level
+   * Shows the user the level box where it can choose a level
    * If the user already chose one, hide it with a nice effect.
    */
   renderChooseLevelBox() {
@@ -105,13 +107,13 @@ class Game extends Component {
     let quantityOfDigits = null;
 
     switch (levelChosen) {
-      case 'facil':
+      case 'easy':
         quantityOfDigits = 4;
         break;
-      case 'moderado':
+      case 'moderate':
         quantityOfDigits = 5;
         break;
-      case 'dificil':
+      case 'hard':
         quantityOfDigits = 6;
         break;
       default:
@@ -121,16 +123,31 @@ class Game extends Component {
     return quantityOfDigits;
   }
 
+  /**
+   * Translate the levels to spanish
+   * @param {string} level - level chosen by player
+   * @return {string} level translated to spanish
+   */
+  levelToSpanish(level) {
+    const levelsTranslation = {
+      easy: 'Fácil',
+      moderate: 'Moderado',
+      hard: 'Difícil',
+      lottery: 'Lotería',
+    }
+
+    return levelsTranslation[level];
+  }
+
   render() {
     return (
       <div className="main-content">
         <div className="game">
           {this.renderChooseLevelBox()}
 
-          <Level level={this.state.level}/>
-          {console.log(this.state.numberToGuess)}
+          <Level level={this.levelToSpanish(this.state.level)}/>
 
-          <InputsContainer />
+          <InputsContainer inputsToRender={this.state.quantityOfDigits} />
 
           <Status />
         </div>

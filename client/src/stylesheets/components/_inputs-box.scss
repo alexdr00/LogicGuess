@@ -1,0 +1,25 @@
+.inputs-box {
+  &__inputs {
+    align-self: center;
+    margin: 4rem 0;
+  }
+
+  &__inputs-button {
+    align-self: center;
+    margin-bottom: 4rem;
+  }
+
+  &__digit-input {
+    width: 5rem;
+    padding: .5rem;
+    border-radius: 5px;
+    margin-right: 1rem;
+    border: 3px solid $homeIconColor;
+    text-align: center;
+    font-size: 2.5rem;
+
+    &:focus {
+      outline: none;
+    }
+  }
+}

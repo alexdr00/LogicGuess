@@ -1,17 +1,27 @@
 import React from 'react';
 import DigitInput from './DigitInput';
 
-const InputsContainer = () => {
+const InputsContainer = (props) => {
+  const renderInputs = () => {
+    const inputsToRender = [];
+
+    for (let i = 0; i < props.inputsToRender; i++) {
+      inputsToRender.push(<DigitInput />);
+    }
+
+    return inputsToRender;
+  }
+
   return (
     <div>
-      <form className="game__inputs-container">
+      <form className="inputs-box">
 
-        <div className="game__inputs">
-          <DigitInput />
+        <div className="inputs-box__inputs">
+          {renderInputs()}
         </div>
 
-        <div className="game__inputs-button">
-          <button type="submit" className="game__submit-guess">Intentar</button>
+        <div className="inputs-box__inputs-button">
+          <button type="submit" className="inputs-box__submit-guess">Intentar</button>
         </div>
       </form>
     </div>

@@ -1,0 +1,11 @@
+.levels-box {
+  border-radius: 10px;
+  background-color: $manualIconColor;
+  box-shadow: 2px 15px 50px $lightGrayColor;
+
+  &__level-button {
+    padding: 10px;
+    cursor: pointer;
+    background-color: white;
+  }
+}
