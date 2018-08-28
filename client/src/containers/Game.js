@@ -3,12 +3,14 @@ import ChooseLevelBox from '../components/ChooseLevel';
 import Level from '../components/Level';
 import InputsContainer from '../components/InputsContainer';
 import Status from '../components/Status';
+import ErrorMessage from '../components/ErrorMessage';
 
 class Game extends Component {
   constructor(props) {
     super(props);
 
     this.handleLevelChoose = this.handleLevelChoose.bind(this);
+    this.handleInputChange = this.handleInputChange.bind(this);
 
     this.state = {
       attempts: 0,
@@ -16,26 +18,117 @@ class Game extends Component {
       placementsGuessed: null,
       level: null,
       numberToGuess: null,
-      quantityOfDigits: null,
-      isLotteryLevel: null
+      digitsQuantity: null,
+      isLotteryLevel: null,
+      numberBeingGuessed: [],
+      canGuessBeSent: false,
+      error: null
     }
   }
 
   /**
    * Sets up the game basic data to start playing.
    * based on the level chosen
+   *
    * @param {string} level - level chosen by player
    */
   handleLevelChoose(level) {
-    const quantityOfDigits = this.getQuantityOfDigits(level);
-    const numberToGuess = this.generateNumberToGuess(quantityOfDigits);
+    const digitsQuantity = this.getDigitsQuantity(level);
+    const numberToGuess = this.generateNumberToGuess(digitsQuantity);
 
     this.setState({
       level,
       numberToGuess,
-      quantityOfDigits,
+      digitsQuantity,
       isLotteryLevel: level === 'lottery' ? true : false,
     });
+  }
+
+  /**
+   * Performs validations to the user input
+   *
+   * @param {object} event - event specifications
+   * @param {int} index - Input placement
+   */
+  handleInputChange(event, index) {
+    const inputDigit = event.target.value;
+    const digitsQuantity = this.state.digitsQuantity;
+    const numberBeingGuessed = this.addDigit(this.state.numberBeingGuessed, index, inputDigit);
+
+    // ** Input Validations **
+    if (isNaN(inputDigit)) {
+      this.setState({
+        canGuessBeSent: false,
+        error: 'Debe ser número entero',
+      });
+      return;
+    }
+
+    if (this.hasDuplicateDigits(numberBeingGuessed)) {
+      this.setState({
+        canGuessBeSent: false,
+        error: 'No puedes repetir dígitos',
+      });
+      return;
+    }
+
+    // If there is no error, clean the state
+    this.setState({ error: null });
+
+    // If the input is a blank space, prevent from submitting
+    // without showing any error
+    if (inputDigit == false) {
+      this.setState({ canGuessBeSent: false });
+      return;
+    }
+
+    // If everything is alright allow submitting the form
+    if (this.hasRequiredDigits(digitsQuantity, numberBeingGuessed)) {
+      this.setState({ canGuessBeSent: true });
+      return;
+    }
+  }
+
+  /**
+   * Add a digit to the number the user is trying to guess
+   *
+   * @param {array} numberBeingGuessed - Array of digits that the user has typed
+   * @param {int} index - index of current input
+   * @param {*} value - value entered
+   * @return {array} Array of digits the user has typed (updated)
+   */
+  addDigit(numberBeingGuessed, index, value) {
+    numberBeingGuessed[index] = value;
+
+    // doesn't add the digit if it is NaN
+    numberBeingGuessed = numberBeingGuessed.filter(digit => !isNaN(digit));
+
+    return numberBeingGuessed;
+  }
+
+  /**
+   * Check if the user has typed the quantity digits the level requires
+   *
+   * @param {int} digitsQuantity - quantity of digits the user has to guess
+   * @param {array} numberBeingGuessed - array of digits the user has typed
+   * @return {boolean} true if user has typed all required digits, false otherwise.
+   */
+  hasRequiredDigits(digitsQuantity, numberBeingGuessed) {
+    if (numberBeingGuessed.length === digitsQuantity) {
+      return true;
+    }
+
+    return false;
+  }
+
+  /**
+   * Renders an error if any
+   * @param {string} error - Error to display
+   */
+  renderErrorMessage(error) {
+    if (error) {
+      return <ErrorMessage error={error} />
+    }
   }
 
   /**
@@ -56,14 +149,14 @@ class Game extends Component {
    *
    * Generates another number if the previous one had duplicate digits
    *
-   * @param {int} quantityOfDigits - how many digits should be generated
+   * @param {int} digitsQuantity - how many digits should be generated
    * @return {int} number which digits the user has to guess
    */
-  generateNumberToGuess(quantityOfDigits) {
+  generateNumberToGuess(digitsQuantity) {
     let rangeMax = ['1'];
     let rangeMin = null;
 
-    for (let i = 0; i < quantityOfDigits; i++) {
+    for (let i = 0; i < digitsQuantity; i++) {
       rangeMax.push('0');
     }
 
@@ -74,23 +167,27 @@ class Game extends Component {
       .floor(Math.random() * (rangeMax - rangeMin)) + rangeMin;
 
     if (this.hasDuplicateDigits(numberToGuess)) {
-      return this.generateNumberToGuess(quantityOfDigits);
+      return this.generateNumberToGuess(digitsQuantity);
     }
 
     return numberToGuess;
   }
 
   /**
-   * Checks if the number to guess that was generated has duplicate digits
+   * Checks if certain number has duplicate digits
    *
-   * @param {int} generatedNumber - generated number to guess
-   * @return {boolean} true if the generated number has duplicate digits, false otherwise.
+   * @param {int|array} numberArr - number to check
+   * @return {boolean} true if the number has duplicate digits, false otherwise.
    */
-  hasDuplicateDigits(generatedNumber) {
-    const generatedNumberArr = generatedNumber.toString().split('');
-    const withNoDuplicates = new Set(generatedNumberArr);
+  hasDuplicateDigits(numberArr) {
+    // If argument is int, convert to array
+    if (Number.isInteger(numberArr)) {
+      numberArr = numberArr.toString().split('');
+    }
 
-    if (generatedNumberArr.length === withNoDuplicates.size) {
+    const withNoDuplicates = new Set(numberArr);
+
+    if (numberArr.length === withNoDuplicates.size) {
       return false;
     }
 
@@ -103,28 +200,28 @@ class Game extends Component {
    * @param {string} levelChosen - level chosen by user
    * @return {int} quantity of digits the user has to guess in order to win
    */
-  getQuantityOfDigits(levelChosen) {
-    let quantityOfDigits = null;
+  getDigitsQuantity(levelChosen) {
+    let digitsQuantity = null;
 
     switch (levelChosen) {
       case 'easy':
-        quantityOfDigits = 4;
+    digitsQuantity = 4;
         break;
       case 'moderate':
-        quantityOfDigits = 5;
+    digitsQuantity = 5;
         break;
       case 'hard':
-        quantityOfDigits = 6;
+    digitsQuantity = 6;
         break;
       default:
-        quantityOfDigits = 5;
+    digitsQuantity = 5;
     }
 
-    return quantityOfDigits;
+    return digitsQuantity;
   }
 
   /**
-   * Translate the levels to spanish
+   * Translates the levels to spanish
    * @param {string} level - level chosen by player
    * @return {string} level translated to spanish
    */
@@ -147,7 +244,13 @@ class Game extends Component {
 
           <Level level={this.levelToSpanish(this.state.level)}/>
 
-          <InputsContainer inputsToRender={this.state.quantityOfDigits} />
+          <InputsContainer
+            onInputChange={this.handleInputChange}
+            inputsToRender={this.state.digitsQuantity}
+            canGuessBeSent={this.state.canGuessBeSent}
+          />
+
+          {this.renderErrorMessage(this.state.error)}
 
           <Status />
         </div>
@@ -155,4 +258,5 @@ class Game extends Component {
     );
   }
 }
+
 export default Game;
