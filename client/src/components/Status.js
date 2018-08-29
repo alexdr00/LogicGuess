@@ -1,25 +1,25 @@
 import React from 'react';
 import StatusType from './StatusType';
 
-const Status = () => {
+const Status = (props) => {
   return (
     <div className="status-box">
       <StatusType
         statusName="Dígitos Adivinados"
         cssModifier="digits-guessed"
-        statusValue="5"
+        statusValue={props.digitsGuessed}
       />
 
       <StatusType
         statusName="Colocaciones Adivinadas"
         cssModifier="placements-guessed"
-        statusValue="2"
+        statusValue={props.placementsGuessed}
       />
 
       <StatusType
         statusName="Intentos"
         cssModifier="attempts"
-        statusValue="3"
+        statusValue={props.attempts}
       />
     </div>
   );

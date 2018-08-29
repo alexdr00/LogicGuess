@@ -11,7 +11,11 @@ const InputsContainer = (props) => {
 
     for (let i = 0; i < props.inputsToRender; i++) {
       inputsToRender
-        .push(<DigitInput key={i} onChange={props.onInputChange} index={i} />);
+        .push(<DigitInput
+                key={i}
+                onChange={props.onInputChange}
+                index={i}
+              />);
     }
 
     return inputsToRender;
@@ -26,7 +30,7 @@ const InputsContainer = (props) => {
 
         <div className="inputs-box__inputs-button">
           <button
-            type="button"
+            type="submit"
             disabled={!props.canGuessBeSent} className="inputs-box__submit-guess"
             onClick={(event) => props.onSubmitAttempt(event)}
           >

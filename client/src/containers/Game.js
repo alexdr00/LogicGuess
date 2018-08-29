@@ -11,18 +11,21 @@ class Game extends Component {
 
     this.handleLevelChoose = this.handleLevelChoose.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
+    this.handleSubmitAttempt = this.handleSubmitAttempt.bind(this);
 
     this.state = {
       attempts: 0,
-      digitsGuessed: null,
-      placementsGuessed: null,
+      digitsGuessed: 0,
+      placementsGuessed: 0,
+      history: [],
       level: null,
       numberToGuess: null,
       digitsQuantity: null,
       isLotteryLevel: null,
       numberBeingGuessed: [],
       canGuessBeSent: false,
-      error: null
+      hasPlayerWon: false,
+      error: null,
     }
   }
 
@@ -56,7 +59,7 @@ class Game extends Component {
     const numberBeingGuessed = this.addDigit(this.state.numberBeingGuessed, index, inputDigit);
 
     // ** Input Validations **
-    // check if input is a blank space
+    // checks if input is a blank space
     if (inputDigit.trim() === "") {
       this.setState({ canGuessBeSent: false });
       return;
@@ -94,25 +97,76 @@ class Game extends Component {
   }
 
   handleSubmitAttempt(event) {
-    console.log('attempt submission');
+    event.preventDefault();
+
+    const numberBeingGuessed = this.state.numberBeingGuessed;
+    const numberToGuess = this.state.numberToGuess;
+    const guessed = this.countGuessed(numberBeingGuessed, numberToGuess);
+    const { digitsGuessed } = guessed;
+    const { placementsGuessed } = guessed;
+    const attempts = this.state.attempts + 1;
+    const history = this.addRecordToHistory(numberBeingGuessed, this.state.history);
+
+    this.setState({
+      attempts,
+      digitsGuessed,
+      placementsGuessed,
+      history,
+    });
+
+    // checks if user won
+    if (digitsGuessed === numberToGuess.length) {
+      this.setState({ hasPlayerWon: true });
+    }
+  }
+
+  addRecordToHistory(record, history) {
+    history = history.slice();
+    record = parseInt(record.join(''), 0);
+    history.push(record);
+
+    return history;
+  }
+
+  countGuessed(numberBeingGuessed, numberToGuess) {
+    let digitsGuessed = 0;
+    let placementsGuessed = 0;
+
+    numberToGuess.forEach(digitToGuess => {
+      numberBeingGuessed.forEach(digitTyped => {
+        const indexDigitToGuess = numberToGuess.indexOf(digitToGuess);
+        const indexDigitTyped = numberBeingGuessed.indexOf(digitTyped);
+
+        if (digitToGuess === digitTyped) {
+          digitsGuessed += 1;
+
+          if (indexDigitToGuess === indexDigitTyped) {
+            placementsGuessed += 1;
+          }
+        }
+
+      })
+    });
+
+    return { digitsGuessed, placementsGuessed };
   }
 
   /**
-   * Add a digit to the number the user is trying to guess
+   * Adds a digit to the number the user is trying to guess
    *
    * @param {array} numberBeingGuessed - Array of digits that the user has typed
    * @param {int} index - index of current input
-   * @param {*} value - value entered
+   * @param {string|int} value - value entered
    * @return {array} Array of digits the user has typed (updated)
    */
   addDigit(numberBeingGuessed, index, value) {
     // Copies array to keep immutability
     numberBeingGuessed = numberBeingGuessed.slice();
-    value = parseInt(value);
 
+    value = parseInt(value, 0);
     numberBeingGuessed[index] = value;
 
-    // Update state with current structure and values
+    // Updates state with current structure and values
     this.setState({ numberBeingGuessed });
 
     // filters non-integers
@@ -123,7 +177,7 @@ class Game extends Component {
   }
 
   /**
-   * Check if the user has typed the quantity digits the level requires
+   * Checks if the user has typed the quantity digits the level requires
    *
    * @param {int} digitsQuantity - quantity of digits the user has to guess
    * @param {array} numberBeingGuessed - array of digits the user has typed
@@ -160,13 +214,13 @@ class Game extends Component {
   }
 
   /**
-   * Generates the number the user has to guess.
+   * Generates a number the user has to guess.
    * the quantity of digits to guess is based on the level chosen.
    *
    * Generates another number if the previous one had duplicate digits
    *
    * @param {int} digitsQuantity - how many digits should be generated
-   * @return {int} number which digits the user has to guess
+   * @return {array} array of digits the user has to guess.
    */
   generateNumberToGuess(digitsQuantity) {
     let rangeMax = ['1'];
@@ -176,17 +230,33 @@ class Game extends Component {
       rangeMax.push('0');
     }
 
-    rangeMin = parseInt(rangeMax.slice(0, -1).join(''));
-    rangeMax = parseInt(rangeMax.join(''));
+    rangeMin = parseInt(rangeMax.slice(0, -1).join(''), 0);
+    rangeMax = parseInt(rangeMax.join(''), 0);
 
-    const numberToGuess = Math
+    let numberToGuess = Math
       .floor(Math.random() * (rangeMax - rangeMin)) + rangeMin;
 
     if (this.hasDuplicateDigits(numberToGuess)) {
       return this.generateNumberToGuess(digitsQuantity);
     }
 
+    // convert to array
+    numberToGuess = this.intToArray(numberToGuess);
+
     return numberToGuess;
+  }
+
+  /**
+   * Converts an integer into an array
+   *
+   * @param {int} int Integer to convert into array
+   * @return {array} returns an array of integers
+   */
+  intToArray(int) {
+    let intArr = int.toString().split('');
+    intArr = intArr.map(intStr => parseInt(intStr, 0));
+
+    return intArr;
   }
 
   /**
@@ -196,7 +266,7 @@ class Game extends Component {
    * @return {boolean} true if the number has duplicate digits, false otherwise.
    */
   hasDuplicateDigits(numberArr) {
-    // If argument is int, convert to array
+    // If numerArr is int, convert to array
     if (Number.isInteger(numberArr)) {
       numberArr = numberArr.toString().split('');
     }
@@ -269,7 +339,11 @@ class Game extends Component {
 
           {this.renderErrorMessage(this.state.error)}
 
-          <Status />
+          <Status
+            attempts={this.state.attempts}
+            digitsGuessed={this.state.digitsGuessed}
+            placementsGuessed={this.state.placementsGuessed}
+          />
         </div>
       </div>
     );
