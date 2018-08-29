@@ -25,7 +25,15 @@ const InputsContainer = (props) => {
         </div>
 
         <div className="inputs-box__inputs-button">
-          <button type="submit" disabled={!props.canGuessBeSent} className="inputs-box__submit-guess">Intentar</button>
+          <button
+            type="button"
+            disabled={!props.canGuessBeSent} className="inputs-box__submit-guess"
+            onClick={(event) => props.onSubmitAttempt(event)}
+          >
+
+            Intentar
+
+            </button>
         </div>
       </form>
     </div>

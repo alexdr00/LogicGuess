@@ -45,7 +45,7 @@ class Game extends Component {
   }
 
   /**
-   * Performs validations to the user input
+   * Handles input when user types something in
    *
    * @param {object} event - event specifications
    * @param {int} index - Input placement
@@ -56,6 +56,12 @@ class Game extends Component {
     const numberBeingGuessed = this.addDigit(this.state.numberBeingGuessed, index, inputDigit);
 
     // ** Input Validations **
+    // check if input is a blank space
+    if (inputDigit.trim() === "") {
+      this.setState({ canGuessBeSent: false });
+      return;
+    }
+
     if (isNaN(inputDigit)) {
       this.setState({
         canGuessBeSent: false,
@@ -72,14 +78,12 @@ class Game extends Component {
       return;
     }
 
-    // If there is no error, clean the state
+    // If there is no error, clean the state up
     this.setState({ error: null });
 
-    // If the input is a blank space, prevent from submitting
-    // without showing any error
-    if (inputDigit == false) {
-      this.setState({ canGuessBeSent: false });
-      return;
+    // Autotab
+    if (event.target.nextSibling) {
+      event.target.nextSibling.focus();
     }
 
     // If everything is alright allow submitting the form
@@ -87,6 +91,10 @@ class Game extends Component {
       this.setState({ canGuessBeSent: true });
       return;
     }
+  }
+
+  handleSubmitAttempt(event) {
+    console.log('attempt submission');
   }
 
   /**
@@ -98,10 +106,18 @@ class Game extends Component {
    * @return {array} Array of digits the user has typed (updated)
    */
   addDigit(numberBeingGuessed, index, value) {
+    // Copies array to keep immutability
+    numberBeingGuessed = numberBeingGuessed.slice();
+    value = parseInt(value);
+
     numberBeingGuessed[index] = value;
 
-    // doesn't add the digit if it is NaN
-    numberBeingGuessed = numberBeingGuessed.filter(digit => !isNaN(digit));
+    // Update state with current structure and values
+    this.setState({ numberBeingGuessed });
+
+    // filters non-integers
+    numberBeingGuessed = numberBeingGuessed
+    .filter(digit => Number.isInteger(digit));
 
     return numberBeingGuessed;
   }
@@ -248,6 +264,7 @@ class Game extends Component {
             onInputChange={this.handleInputChange}
             inputsToRender={this.state.digitsQuantity}
             canGuessBeSent={this.state.canGuessBeSent}
+            onSubmitAttempt={this.handleSubmitAttempt}
           />
 
           {this.renderErrorMessage(this.state.error)}
