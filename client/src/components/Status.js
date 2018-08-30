@@ -1,6 +1,16 @@
 import React from 'react';
 import StatusType from './StatusType';
 
+const renderPlacementsGuessed = (isLotteryLevel, placementsGuessed) => {
+  if (isLotteryLevel) {
+    return <StatusType
+      statusName="Colocaciones Adivinadas"
+      cssModifier="placements-guessed"
+      statusValue={placementsGuessed}
+    />
+  }
+}
+
 const Status = (props) => {
   return (
     <div className="status-box">
@@ -10,11 +20,7 @@ const Status = (props) => {
         statusValue={props.digitsGuessed}
       />
 
-      <StatusType
-        statusName="Colocaciones Adivinadas"
-        cssModifier="placements-guessed"
-        statusValue={props.placementsGuessed}
-      />
+      {renderPlacementsGuessed(props.isLotteryLevel, props.placementsGuessed)}
 
       <StatusType
         statusName="Intentos"

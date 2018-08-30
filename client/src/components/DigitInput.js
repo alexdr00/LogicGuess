@@ -7,6 +7,7 @@ const DigitInput = (props) => {
       maxLength="1"
       className="inputs-box__digit-input"
       onChange={(event) => props.onChange(event, props.index)}
+      value={props.value}
     />
   );
 };

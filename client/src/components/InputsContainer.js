@@ -10,11 +10,19 @@ const InputsContainer = (props) => {
     const inputsToRender = [];
 
     for (let i = 0; i < props.inputsToRender; i++) {
+      // Stores everything but falsy values
+      let inputValue = props.values[i] || '';
+      // Since 0 is falsy, it is necessary no to exclude it.
+      if (props.values[i] === 0) {
+        inputValue = props.values[i];
+      }
+
       inputsToRender
         .push(<DigitInput
                 key={i}
                 onChange={props.onInputChange}
                 index={i}
+                value={inputValue}
               />);
     }
 
@@ -37,7 +45,7 @@ const InputsContainer = (props) => {
 
             Intentar
 
-            </button>
+          </button>
         </div>
       </form>
     </div>
