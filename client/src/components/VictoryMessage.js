@@ -2,7 +2,7 @@ import React from 'react';
 
 const VictoryMessage = () => {
   return (
-    <div>
+    <div className="victory-message">
       Congrats, you have won!!!
     </div>
   );

@@ -17,13 +17,14 @@ const InputsContainer = (props) => {
         inputValue = props.values[i];
       }
 
-      inputsToRender
-        .push(<DigitInput
-                key={i}
-                onChange={props.onInputChange}
-                index={i}
-                value={inputValue}
-              />);
+      inputsToRender.push(
+        <DigitInput
+          key={i}
+          onChange={props.onInputChange}
+          index={i}
+          value={inputValue}
+        />
+      );
     }
 
     return inputsToRender;
@@ -31,21 +32,9 @@ const InputsContainer = (props) => {
 
   return (
     <div>
-      <form className="inputs-box">
+      <form className="inputs-box" id="user-digits">
         <div className="inputs-box__inputs">
           {renderInputs()}
-        </div>
-
-        <div className="inputs-box__inputs-button">
-          <button
-            type="submit"
-            disabled={!props.canGuessBeSent} className="inputs-box__submit-guess"
-            onClick={(event) => props.onSubmitAttempt(event)}
-          >
-
-            Intentar
-
-          </button>
         </div>
       </form>
     </div>

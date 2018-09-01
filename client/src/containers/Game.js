@@ -1,21 +1,24 @@
 // Components
-import React, { Component } from 'react';
-import ChooseLevelBox from '../components/ChooseLevel';
-import Level from '../components/Level';
-import InputsContainer from '../components/InputsContainer';
-import Status from '../components/Status';
-import History from '../components/History';
-import ErrorMessage from '../components/ErrorMessage';
-import VictoryMessage from '../components/VictoryMessage';
+import React, { Component } from "react";
+import ChooseLevelBox from "../components/ChooseLevel";
+// import Level from '../components/Level';
+import InputsContainer from "../components/InputsContainer";
+import History from "../components/History";
+import ErrorMessage from "../components/ErrorMessage";
+import VictoryMessage from "../components/VictoryMessage";
+import PlacementsGuessed from "../components/PlacementsGuessed";
+import Attempts from "../components/Attempts";
+import DigitsGuessed from "../components/DigitsGuessed";
+import SendAttemptButton from "../components/SendAttemptButton";
 
 // Dependencies
-import * as validate from '../utils/inputValidations';
-import generateNumberToGuess from '../utils/generateNumber';
-import addRecordToHistory from '../utils/addRecordToHistory';
-import countGuessed from '../utils/countGuessed';
-import getDigitsQuantity from '../utils/getDigitsQuantity';
-import levelToSpanish from '../utils/levelToSpanish';
-import checkPlayerHasWon from '../utils/checkPlayerHasWon';
+import * as validate from "../utils/inputValidations";
+import generateNumberToGuess from "../utils/generateNumber";
+import addRecordToHistory from "../utils/addRecordToHistory";
+import countGuessed from "../utils/countGuessed";
+import getDigitsQuantity from "../utils/getDigitsQuantity";
+import levelToSpanish from "../utils/levelToSpanish";
+import checkPlayerHasWon from "../utils/checkPlayerHasWon";
 
 class Game extends Component {
   constructor(props) {
@@ -37,8 +40,8 @@ class Game extends Component {
       numberBeingGuessed: [],
       canGuessBeSent: false,
       hasPlayerWon: false,
-      error: null,
-    }
+      error: null
+    };
   }
 
   /**
@@ -55,7 +58,7 @@ class Game extends Component {
       level,
       numberToGuess,
       digitsQuantity,
-      isLotteryLevel: level === 'lottery' ? true : false,
+      isLotteryLevel: level === "lottery" ? true : false
     });
   }
 
@@ -68,7 +71,11 @@ class Game extends Component {
   handleInputChange(event, index) {
     const inputDigit = event.target.value;
     const digitsQuantity = this.state.digitsQuantity;
-    const numberBeingGuessed = this.addDigit(this.state.numberBeingGuessed, index, inputDigit);
+    const numberBeingGuessed = this.addDigit(
+      this.state.numberBeingGuessed,
+      index,
+      inputDigit
+    );
 
     // ** Input Validations **
     // checks if input is a blank space
@@ -80,7 +87,7 @@ class Game extends Component {
     if (isNaN(inputDigit)) {
       this.setState({
         canGuessBeSent: false,
-        error: 'Debe ser número entero',
+        error: "Debe ser número entero"
       });
       return;
     }
@@ -88,7 +95,7 @@ class Game extends Component {
     if (validate.hasDuplicateDigits(numberBeingGuessed)) {
       this.setState({
         canGuessBeSent: false,
-        error: 'No puedes repetir dígitos',
+        error: "No puedes repetir dígitos"
       });
       return;
     }
@@ -120,7 +127,12 @@ class Game extends Component {
     const history = addRecordToHistory(numberBeingGuessed, this.state.history);
     const isLotteryLevel = this.state.isLotteryLevel;
     // checks if player won
-    const hasPlayerWon = checkPlayerHasWon(digitsGuessed, placementsGuessed, numberToGuess,isLotteryLevel);
+    const hasPlayerWon = checkPlayerHasWon(
+      digitsGuessed,
+      placementsGuessed,
+      numberToGuess,
+      isLotteryLevel
+    );
 
     this.setState({
       attempts,
@@ -128,7 +140,7 @@ class Game extends Component {
       placementsGuessed,
       numberBeingGuessed: [],
       canGuessBeSent: false,
-      history,
+      history
     });
 
     if (hasPlayerWon) {
@@ -155,8 +167,9 @@ class Game extends Component {
     this.setState({ numberBeingGuessed });
 
     // filters non-integers
-    numberBeingGuessed = numberBeingGuessed
-    .filter(digit => Number.isInteger(digit));
+    numberBeingGuessed = numberBeingGuessed.filter(digit =>
+      Number.isInteger(digit)
+    );
 
     return numberBeingGuessed;
   }
@@ -167,7 +180,7 @@ class Game extends Component {
    */
   renderErrorMessage(error) {
     if (error) {
-      return <ErrorMessage error={error} />
+      return <ErrorMessage error={error} />;
     }
   }
 
@@ -185,7 +198,13 @@ class Game extends Component {
 
   renderVictoryMessage(hasUserWon) {
     if (hasUserWon) {
-      return <VictoryMessage />
+      return <VictoryMessage />;
+    }
+  }
+
+  renderPlacementsGuessed(isLotteryLevel, placementsGuessed) {
+    if (isLotteryLevel) {
+      return <PlacementsGuessed placementsGuessed={placementsGuessed} />;
     }
   }
 
@@ -198,29 +217,32 @@ class Game extends Component {
 
           {this.renderChooseLevelBox()}
 
-          <History
-            history={this.state.history}
-          />
+          <DigitsGuessed digitsGuessed={this.state.digitsGuessed} />
 
-          <Level level={levelToSpanish(this.state.level)}/ >
+          {this.renderPlacementsGuessed(
+            this.state.isLotteryLevel,
+            this.state.placementsGuessed
+          )}
+
+          <Attempts attempts={this.state.attempts} />
 
           <InputsContainer
             onInputChange={this.handleInputChange}
             inputsToRender={this.state.digitsQuantity}
-            canGuessBeSent={this.state.canGuessBeSent}
-            onSubmitAttempt={this.handleSubmitAttempt}
             values={this.state.numberBeingGuessed}
           />
+
+          {/* <Level level={levelToSpanish(this.state.level)}/ > */}
 
           {this.renderErrorMessage(this.state.error)}
           {this.renderVictoryMessage(this.state.hasPlayerWon)}
 
-          <Status
-            attempts={this.state.attempts}
-            digitsGuessed={this.state.digitsGuessed}
-            placementsGuessed={this.state.placementsGuessed}
-            isLotteryLevel={this.state.isLotteryLevel}
+          <SendAttemptButton
+            onSubmitAttempt={this.handleSubmitAttempt}
+            canGuessBeSent={this.state.canGuessBeSent}
           />
+
+          <History history={this.state.history} />
         </div>
       </div>
     );
