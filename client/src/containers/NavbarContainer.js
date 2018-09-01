@@ -9,6 +9,12 @@ class Navbar extends Component {
     return (
       <nav className="navigation">
         <NavbarItem
+          icon="user"
+          cssModifier="profile"
+          itemName="Perfil"
+          route="/profile" />
+
+        <NavbarItem
           icon="home"
           cssModifier="home"
           itemName="Inicio"

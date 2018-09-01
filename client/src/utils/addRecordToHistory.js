@@ -6,7 +6,7 @@
  */
 const addRecordToHistory = (record, history) => {
   history = history.slice();
-  record = parseInt(record.join(''), 0);
+  record = record.join('');
   history.push(record);
 
   return history;

@@ -1,12 +1,14 @@
 // Colors
 $colorWhite: #fff;
-$navColor: #411db7;
-$footerColor: #29117a;
-$homeIconColor: #007EF7;
-$manualIconColor: #00A3B5;
-$playIconColor: #00CA9A;
+$navColor: rgb(70, 68, 70);
+$footerColor: darken($navColor, 10);
+$aquaColor: #6bbaa7;
+$sunshineColor: #fba100;
+$crimsonSkyColor: #cf6766;
+$lavenderColor: #6c648b;
 
 $lightGrayColor: #999;
 
 // Layout
-$sidebarWidth: 8rem;
+$sidebarWidth: 7.5rem;
+$footerHeight: 5rem;

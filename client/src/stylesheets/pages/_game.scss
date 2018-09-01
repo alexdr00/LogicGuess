@@ -40,19 +40,17 @@
 .levels-box {
   position: absolute;
   z-index: 100;
-  left: 0;
-  right: 0;
   animation-duration: 1.5s;
 
   &--shown {
-    top: 5%;
-    bottom: 5%;
+    top: 15%;
+    bottom: 25%;
     animation-name: showLevelBox;
   }
 
   &--hidden {
-    top: -100%;
-    bottom: 100%;
+    top: -90%;
+    bottom: 120%;
     animation-name: hideLevelBox;
     animation-fill-mode: forwards;
   }

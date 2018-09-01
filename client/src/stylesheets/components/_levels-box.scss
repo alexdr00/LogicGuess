@@ -1,11 +1,51 @@
 .levels-box {
-  border-radius: 10px;
-  background-color: $manualIconColor;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+
+  border-radius: 20px;
   box-shadow: 2px 15px 50px $lightGrayColor;
+  width: 35%;
+  left: 50%;
+  transform: translateX(-50%);
+  overflow: hidden;
 
   &__level-button {
     padding: 10px;
+    width: 50%;
+    height: 50%;
+    flex: 1 50%;
     cursor: pointer;
     background-color: white;
+    border: none;
+    color: $colorWhite;
+    font-weight: 500;
+    font-size: 2.3rem;
+    transition: background-color .4s ease;
+
+    &--easy {
+      background-color: $lavenderColor;
+    }
+    &--moderate {
+      background-color: $aquaColor;
+    }
+    &--hard {
+      background-color: $sunshineColor;
+    }
+    &--lottery {
+      background-color: $crimsonSkyColor;
+    }
+    &--easy:hover {
+      background-color: darken($lavenderColor, 7);
+    }
+    &--moderate:hover {
+      background-color: darken($aquaColor, 7);
+    }
+    &--hard:hover {
+      background-color: darken($sunshineColor, 7);
+    }
+    &--lottery:hover {
+      background-color: darken($crimsonSkyColor, 7);
+    }
   }
 }

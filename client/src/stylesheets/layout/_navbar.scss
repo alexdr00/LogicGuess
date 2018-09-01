@@ -15,11 +15,15 @@
     justify-content: center;
 
     width: 100%;
-    background-color: darken($navColor, 15);
+    background-color: darken($navColor, 8);
     margin: 2rem 0;
     height: 9rem;
     position: relative;
+
     // When the item is hovered, show tag
+    &--profile:hover .navigation__tag--profile {
+      left: 90%;
+    }
     &--home:hover .navigation__tag--home {
       left: 90%;
     }
@@ -31,14 +35,17 @@
     }
 
     // When the item is hovered, change its color
+    &--profile:hover .navigation__icon--profile {
+      color: $aquaColor;
+    }
     &--home:hover .navigation__icon--home {
-      color: $homeIconColor;
+      color: $lavenderColor;
     }
     &--manual:hover .navigation__icon--manual {
-      color: $manualIconColor;
+      color: $crimsonSkyColor;
     }
     &--play:hover .navigation__icon--play {
-      color: $playIconColor;
+      color: $sunshineColor;
     }
   }
 
@@ -46,6 +53,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
 
     position: absolute;
     width: 20rem;
@@ -55,36 +63,41 @@
     text-align: center;
     color: $colorWhite;
     border-radius: 6px;
-    transition: all .3s;
+    transition: all 0.3s;
     left: -200%;
     z-index: -1;
 
+    &--profile {
+      background-color: $aquaColor;
+    }
     &--home {
-      background-color: $homeIconColor;
+      background-color: $lavenderColor;
     }
     &--manual {
-      background-color: $manualIconColor;
+      background-color: $crimsonSkyColor;
     }
     &--play {
-      background-color: $playIconColor;
+      background-color: $sunshineColor;
     }
   }
 
   &__icon {
     font-size: 5rem;
-    transition: color .3s;
+    transition: color 0.3s;
     // Inactive
     color: $colorWhite;
 
+    &--profile--active > *:not(.navigation__tag) {
+      color: $aquaColor;
+    }
     &--home--active > *:not(.navigation__tag) {
-      color: $homeIconColor;
+      color: $lavenderColor;
     }
     &--manual--active > *:not(.navigation__tag) {
-      color: $manualIconColor;
+      color: $crimsonSkyColor;
     }
     &--play--active > *:not(.navigation__tag) {
-      color: $playIconColor;
+      color: $sunshineColor;
     }
   }
 }
-

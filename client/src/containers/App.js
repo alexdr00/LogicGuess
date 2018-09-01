@@ -3,9 +3,10 @@ import { BrowserRouter, Route } from 'react-router-dom';
 
 // Components
 import Navbar from './NavbarContainer';
+import Game from './Game';
+import Profile from './Profile';
 import Home from '../components/Home';
 import Manual from '../components/Manual';
-import Game from './Game';
 import Footer from '../components/Footer';
 
 // Font awesome
@@ -22,6 +23,7 @@ class App extends Component {
           <Navbar></Navbar>
 
           <Route exact path="/" component={Home}/>
+          <Route exact path="/profile" component={Profile}/>
           <Route exact path="/manual" component={Manual} />
           <Route exact path="/game" component={Game}/>
 

@@ -62,7 +62,7 @@ class Game extends Component {
   /**
    * Handles input when user types something in
    *
-   * @param {object} event - event specifications
+   * @param {object} event - Event
    * @param {int} index - Input placement
    */
   handleInputChange(event, index) {
