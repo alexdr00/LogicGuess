@@ -2,9 +2,7 @@ import React from 'react';
 
 const PlacementsGuessed = (props) => {
   return (
-    <div className="placements-guessed">
-      Colocaciones
-
+    <div className="status status--placements-guessed">
       {props.placementsGuessed}
     </div>
   );

@@ -2,14 +2,11 @@
 import React, { Component } from "react";
 import ChooseLevelBox from "../components/ChooseLevel";
 // import Level from '../components/Level';
-import InputsContainer from "../components/InputsContainer";
 import History from "../components/History";
 import ErrorMessage from "../components/ErrorMessage";
 import VictoryMessage from "../components/VictoryMessage";
-import PlacementsGuessed from "../components/PlacementsGuessed";
-import Attempts from "../components/Attempts";
-import DigitsGuessed from "../components/DigitsGuessed";
 import SendAttemptButton from "../components/SendAttemptButton";
+import MainGameContainer from "../components/MainGameContainer";
 
 // Dependencies
 import * as validate from "../utils/inputValidations";
@@ -202,12 +199,6 @@ class Game extends Component {
     }
   }
 
-  renderPlacementsGuessed(isLotteryLevel, placementsGuessed) {
-    if (isLotteryLevel) {
-      return <PlacementsGuessed placementsGuessed={placementsGuessed} />;
-    }
-  }
-
   render() {
     return (
       <div className="main-content">
@@ -217,19 +208,15 @@ class Game extends Component {
 
           {this.renderChooseLevelBox()}
 
-          <DigitsGuessed digitsGuessed={this.state.digitsGuessed} />
-
-          {this.renderPlacementsGuessed(
-            this.state.isLotteryLevel,
-            this.state.placementsGuessed
-          )}
-
-          <Attempts attempts={this.state.attempts} />
-
-          <InputsContainer
-            onInputChange={this.handleInputChange}
-            inputsToRender={this.state.digitsQuantity}
-            values={this.state.numberBeingGuessed}
+          <MainGameContainer
+            digitsGuessed={this.state.digitsGuessed}
+            placementsGuessed={this.state.placementsGuessed}
+            attempts={this.state.attempts}
+            isLotteryLevel={this.state.isLotteryLevel}
+            handleInputChange={this.handleInputChange}
+            digitsQuantity={this.state.digitsQuantity}
+            numberBeingGuessed={this.state.numberBeingGuessed}
+            canGuessBeSent={this.state.canGuessBeSent}
           />
 
           {/* <Level level={levelToSpanish(this.state.level)}/ > */}

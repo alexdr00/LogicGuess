@@ -7,11 +7,7 @@ const SendAttemptButton = (props) => {
         type="submit"
         form="user-digits"
         disabled={!props.canGuessBeSent} className="inputs-box__submit-guess"
-        onClick={(event) => props.onSubmitAttempt(event)} >
-
-        Intentar
-
-      </button>
+        onClick={(event) => props.onSubmitAttempt(event)} />
     </div>
   );
 };

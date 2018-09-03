@@ -2,9 +2,7 @@ import React from 'react';
 
 const DigitsGuessed = (props) => {
   return (
-    <div className="digits-guessed">
-      Intentos
-
+    <div className="status status--digits-guessed">
       {props.digitsGuessed}
     </div>
   );

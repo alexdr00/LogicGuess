@@ -1,57 +1,40 @@
 .game {
-  align-self: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  // General
   width: 100%;
-  min-height: 90vh;
+  min-height: 93.5vh;
   position: relative;
 
-  &__level {
-    align-self: center;
-  }
-}
-
-// Placing components on page
-.inputs-box {
-  display: flex;
-  flex-direction: column;
-}
-
-.status-box {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: row;
-  justify-content: space-between;
-
-  &__status {
-    position: relative;
-  }
-
-  &__value {
-    display: block;
+  // Game Layout
+  .levels-box {
     position: absolute;
-    top: 250%;
+    z-index: 100;
+    animation-duration: 1.5s;
+
+    &--shown {
+      top: 15%;
+      bottom: 25%;
+      animation-name: showLevelBox;
+    }
+
+    &--hidden {
+      top: -90%;
+      bottom: 120%;
+      animation-name: hideLevelBox;
+      animation-fill-mode: forwards;
+    }
+  }
+
+  .main-game-container {
+    position: absolute;
+    top: 30%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-}
 
-.levels-box {
-  position: absolute;
-  z-index: 100;
-  animation-duration: 1.5s;
-
-  &--shown {
-    top: 15%;
-    bottom: 25%;
-    animation-name: showLevelBox;
-  }
-
-  &--hidden {
-    top: -90%;
-    bottom: 120%;
-    animation-name: hideLevelBox;
-    animation-fill-mode: forwards;
+  .send-attempt-button {
+    display: none;
   }
 }
+
+
+

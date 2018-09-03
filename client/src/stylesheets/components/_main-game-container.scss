@@ -1,0 +1,87 @@
+.main-game-container {
+  box-shadow: 16px 19px 31  px #a8a8a8;
+  background-color: $lavenderColor;
+  width: 60%;
+  border-radius: 10px;
+  overflow: hidden;
+
+  .status {
+    position: absolute;
+    width: 10rem;
+    font-size: 3.5rem;
+    background-color: $aquaColor;
+    color: $colorWhite;
+
+    &--digits-guessed {
+      top: 0;
+      bottom: 50%;
+      left: 0;
+      padding-left: 2rem;
+      padding-top: .5rem;
+      -webkit-clip-path: polygon(0 0, 0% 100%, 100% 0);
+      clip-path: polygon(0 0, 0% 100%, 100% 0);
+
+    }
+
+    &--placements-guessed {
+      top: 50%;
+      bottom: 0;
+      left: 0;
+      padding-top: 5.5rem;
+      padding-left: 2rem;
+      -webkit-clip-path: polygon(0 0, 0 100%, 100% 100%);
+      clip-path: polygon(0 0, 0 100%, 100% 100%);
+    }
+
+    &--attempts {
+      top: 0;
+      bottom: 50%;
+      right: 0;
+      text-align: right;
+      padding-right: 2rem;
+      padding-top: .5rem;
+      -webkit-clip-path: polygon(0 0, 100% 0, 100% 100%);
+      clip-path: polygon(0 0, 100% 0, 100% 100%);
+    }
+
+    &--success {
+      top: 50%;
+      bottom: 0;
+      right: 0;
+      text-align: right;
+      padding-top: 5.5rem;
+      padding-right: 2rem;
+      -webkit-clip-path: polygon(100% 100%, 100% 0, 0 100%);
+      clip-path: polygon(100% 100%, 100% 0, 0 100%);
+    }
+
+  }
+
+  .inputs-box {
+    display: flex;
+    flex-direction: column;
+    font-weight: 700;
+
+    &__inputs {
+      align-self: center;
+      margin: 8rem 0;
+    }
+
+    &__digit-input {
+      width: 7rem;
+      padding: .5rem;
+      border-radius: 5px;
+      margin-right: 1rem;
+      font-size: 4rem;
+      text-align: center;
+      border: none;
+      background-color: $colorWhite;
+      color: $lavenderColor;
+
+      &:focus {
+        outline: none;
+      }
+    }
+  }
+
+}

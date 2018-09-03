@@ -14,7 +14,6 @@
   display: flex;
   flex-direction: row;
   justify-content: center;
-  // Same as sidebar (just on desktop) + margin
-  margin-left: $sidebarWidth + 3rem;
-  margin-right: 3rem;
+  // Same as sidebar (just on desktop)
+  margin-left: $sidebarWidth;
 }
