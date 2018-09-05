@@ -23,6 +23,7 @@ const MainGameContainer = (props) => {
         placementsGuessed={props.placementsGuessed}
         attempts={props.attempts}
         canGuessBeSent={props.canGuessBeSent}
+        handleSubmitAttempt={props.handleSubmitAttempt}
       />
 
       <ErrorMessage error={props.error} />

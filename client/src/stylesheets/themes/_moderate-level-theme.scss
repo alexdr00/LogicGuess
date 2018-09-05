@@ -4,6 +4,10 @@
   .status {
     // Corners color
     background-color: $lavenderColor;
+
+    &__error-icon {
+      color: $aquaColor;
+    }
   }
 
   .inputs-box {

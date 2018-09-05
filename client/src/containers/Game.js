@@ -206,14 +206,10 @@ class Game extends Component {
             canGuessBeSent={this.state.canGuessBeSent}
             error={this.state.error}
             level={this.state.level}
+            handleSubmitAttempt={this.handleSubmitAttempt}
           />
 
           {this.renderVictoryMessage(this.state.hasPlayerWon)}
-
-          <SendAttemptButton
-            onSubmitAttempt={this.handleSubmitAttempt}
-            canGuessBeSent={this.state.canGuessBeSent}
-          />
 
           <History history={this.state.history} level={this.state.level} />
         </div>

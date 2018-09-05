@@ -2,13 +2,15 @@ import React from 'react';
 
 const SendAttemptButton = (props) => {
   return (
-    <div className="send-attempt-button">
-      <button
-        type="submit"
-        form="user-digits"
-        disabled={!props.canGuessBeSent} className="inputs-box__submit-guess"
-        onClick={(event) => props.onSubmitAttempt(event)} />
-    </div>
+    <button
+      className="status status__validation status__validation--submit"
+      type="submit"
+      form="user-digits"
+      disabled={!props.canGuessBeSent}
+      onClick={(event) => props.onSubmitAttempt(event)}
+    >
+    {props.children}
+    </button>
   );
 };
 

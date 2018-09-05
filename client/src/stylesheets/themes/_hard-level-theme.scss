@@ -4,6 +4,10 @@
   .status {
     // Corners color
     background-color: $crimsonSkyColor;
+
+    &__error-icon {
+      color: $sunshineColor;
+    }
   }
 
   .inputs-box {

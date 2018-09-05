@@ -22,7 +22,10 @@ const Status = (props) => {
 
       <Attempts attempts={props.attempts} />
 
-      <ValidationSuccessful canGuessBeSent={props.canGuessBeSent} />
+      <ValidationSuccessful
+        canGuessBeSent={props.canGuessBeSent}
+        onSubmitAttempt={props.handleSubmitAttempt}
+      />
     </div>
   );
 }

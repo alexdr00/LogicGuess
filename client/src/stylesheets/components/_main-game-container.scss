@@ -42,15 +42,36 @@
       clip-path: polygon(0 0, 100% 0, 100% 100%);
     }
 
-    &--success {
+    &__validation {
       top: 50%;
       bottom: 0;
       right: 0;
       text-align: right;
       padding-top: 5.5rem;
-      padding-right: 2rem;
+      padding-right: 1.5rem;
       -webkit-clip-path: polygon(100% 100%, 100% 0, 0 100%);
       clip-path: polygon(100% 100%, 100% 0, 0 100%);
+
+      &--submit {
+        cursor: pointer;
+        border: none;
+      }
+
+      &--submit:focus {
+        outline: none;
+      }
+    }
+
+    &__success-icon {
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-name: scaleSuccessArrow;
+    }
+
+    &__error-icon {
+      animation-duration: 1s;
+      animation-iteration-count: infinite;
+      animation-name: rotateErrorSign;
     }
 
   }
