@@ -58,7 +58,6 @@ class Game extends Component {
 
   /**
    * Handles input when user types something in
-   *
    * @param {object} event - Event
    * @param {int} index - Input placement
    */
@@ -137,6 +136,9 @@ class Game extends Component {
       history
     });
 
+    // Focuses the first input
+    document.querySelector('.inputs-box__digit-input').focus();
+
     if (hasPlayerWon) {
       this.setState({ hasPlayerWon });
     }
@@ -144,7 +146,6 @@ class Game extends Component {
 
   /**
    * Adds a digit to the number the user is trying to guess
-   *
    * @param {array} numberBeingGuessed - Array of digits that the user has typed
    * @param {int} index - index of current input
    * @param {string|int} value - value entered

@@ -13,7 +13,7 @@ const History = (props) => {
 
   const renderHistory = (history) => {
     return history.map(historyItem =>
-      <li className="history__item" >
+      <li className="history__item" key={historyItem.index}>
 
         {renderPlacementsGuessedHistory(props.isLotteryLevel, historyItem.placementsGuessed)}
 
