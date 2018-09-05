@@ -26,6 +26,10 @@
 .history.hard-level-theme {
   background-color: $sunshineColor;
 
+  .history__digits-guessed {
+    background-color: $crimsonSkyColor;
+  }
+
   ul {
     li:not(:last-child) {
       // List item separator color

@@ -26,6 +26,11 @@
 .history.lottery-level-theme {
   background-color: $crimsonSkyColor;
 
+  .history__digits-guessed,
+  .history__placements-guessed {
+    background-color: $sunshineColor;
+  }
+
   ul {
     li:not(:last-child) {
       // List item separator color

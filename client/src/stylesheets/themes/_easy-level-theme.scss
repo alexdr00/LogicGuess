@@ -26,6 +26,10 @@
 .history.easy-level-theme {
   background-color: $lavenderColor;
 
+  .history__digits-guessed {
+    background-color: $aquaColor;
+  }
+
   ul {
     li:not(:last-child) {
       // List item separator color

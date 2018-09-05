@@ -5,8 +5,23 @@ import defineTheme from '../utils/defineTheme';
 const History = (props) => {
   const historyStatus = props.history != false ? 'shown' : '';
 
+  const renderPlacementsGuessedHistory = (isLotteryLevel, placementsGuessed) => {
+    if (isLotteryLevel) {
+      return <span className="history__placements-guessed">{placementsGuessed}</span>
+    }
+  }
+
   const renderHistory = (history) => {
-    return history.map(record => <li key={history.indexOf(record)} className="history__item">{record}</li>)
+    return history.map(historyItem =>
+      <li className="history__item" >
+
+        {renderPlacementsGuessedHistory(props.isLotteryLevel, historyItem.placementsGuessed)}
+
+        {historyItem.record}
+
+        <span className="history__digits-guessed">{historyItem.digitsGuessed}</span>
+      </li>
+    );
   }
 
   return (

@@ -118,7 +118,7 @@ class Game extends Component {
     const { digitsGuessed } = guessed;
     const { placementsGuessed } = guessed;
     const attempts = this.state.attempts + 1;
-    const history = addRecordToHistory(numberBeingGuessed, this.state.history);
+    const history = addRecordToHistory(numberBeingGuessed, digitsGuessed, placementsGuessed, this.state.history);
     const isLotteryLevel = this.state.isLotteryLevel;
     // checks if player won
     const hasPlayerWon = checkPlayerHasWon(
@@ -211,7 +211,12 @@ class Game extends Component {
 
           {this.renderVictoryMessage(this.state.hasPlayerWon)}
 
-          <History history={this.state.history} level={this.state.level} />
+          <History
+            history={this.state.history}
+            level={this.state.level}
+            digitsGuessed={this.state.digitsGuessed}
+            isLotteryLevel={this.state.isLotteryLevel}
+          />
         </div>
       </div>
     );
