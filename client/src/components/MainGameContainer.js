@@ -1,37 +1,32 @@
 import React from 'react';
 import InputsContainer from "./InputsContainer";
-import PlacementsGuessed from "./PlacementsGuessed";
-import Attempts from "./Attempts";
-import DigitsGuessed from "./DigitsGuessed";
-import ValidationSuccessful from "./ValidationSuccessful";
+import ErrorMessage from "../components/ErrorMessage";
+import Status from "./Status";
+
+import defineTheme from '../utils/defineTheme';
 
 const MainGameContainer = (props) => {
-
-  const renderPlacementsGuessed = (isLotteryLevel, placementsGuessed) => {
-    if (isLotteryLevel) {
-      return <PlacementsGuessed placementsGuessed={placementsGuessed} />;
-    }
-  }
+  const mainGameContainerStatus = props.level ? 'shown' : '';
 
   return (
-    <div className="main-game-container">
-
-      <DigitsGuessed digitsGuessed={props.digitsGuessed} />
-
-      {renderPlacementsGuessed(
-        props.isLotteryLevel,
-        props.placementsGuessed
-      )}
-
-      <Attempts attempts={props.attempts} />
-
-      <ValidationSuccessful canGuessBeSent={props.canGuessBeSent} />
-
+    <div
+      className={`main-game-container main-game-container--${mainGameContainerStatus} ${defineTheme(props.level)}`} >
       <InputsContainer
         onInputChange={props.handleInputChange}
         inputsToRender={props.digitsQuantity}
         values={props.numberBeingGuessed}
       />
+
+      <Status
+        digitsGuessed={props.digitsGuessed}
+        isLotteryLevel={props.isLotteryLevel}
+        placementsGuessed={props.placementsGuessed}
+        attempts={props.attempts}
+        canGuessBeSent={props.canGuessBeSent}
+      />
+
+      <ErrorMessage error={props.error} />
+
     </div>
   );
 };

@@ -1,0 +1,39 @@
+.history {
+  width: 25%;
+  box-shadow: 16px 19px 31px #a8a8a8;
+  border-radius: 4px;
+  overflow: auto;
+  padding: 2rem 3%;
+
+  ul {
+    padding: 0;
+  }
+
+  &__item {
+    color: $colorWhite;
+    font-size: 2.7rem;
+    letter-spacing: 2.5px;
+    list-style-type: none;
+    padding: 0;
+    text-align: center;
+    margin-bottom: 10px;
+    font-weight: 700;
+  }
+
+  // *** Scrollbar ***
+  // width
+  &::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  // Track
+  &::-webkit-scrollbar-track {
+    padding: 2px;
+  }
+
+  // Handle
+  &::-webkit-scrollbar-thumb {
+    background: $colorWhite;
+    border-radius: 10px;
+  }
+}

@@ -1,0 +1,36 @@
+.main-game-container.moderate-level-theme {
+  background-color: $aquaColor;
+
+  .status {
+    // Corners color
+    background-color: $lavenderColor;
+  }
+
+  .inputs-box {
+    &__digit-input {
+      // Input color
+      color: $aquaColor;
+    }
+  }
+
+  .error-message {
+    color: $aquaColor;
+  }
+
+}
+
+.history.moderate-level-theme {
+  background-color: $aquaColor;
+
+  ul {
+    li:not(:last-child) {
+      // List item separator color
+      border-bottom: 1px solid darken($aquaColor, 20);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    // Scrollbar color
+    background: $aquaColor;
+  }
+}

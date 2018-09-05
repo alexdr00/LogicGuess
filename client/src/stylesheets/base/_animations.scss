@@ -36,3 +36,21 @@
     opacity: 0;
   }
 }
+
+@keyframes showMainGameContainer {
+  0% {
+    left: -100%;
+  }
+
+  35% {
+    left: 68%;
+  }
+
+  50% {
+    left: 45%;
+  }
+
+  68% {
+    left: 50%;
+  }
+}

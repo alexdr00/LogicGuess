@@ -1,9 +1,7 @@
 // Components
 import React, { Component } from "react";
 import ChooseLevelBox from "../components/ChooseLevel";
-// import Level from '../components/Level';
 import History from "../components/History";
-import ErrorMessage from "../components/ErrorMessage";
 import VictoryMessage from "../components/VictoryMessage";
 import SendAttemptButton from "../components/SendAttemptButton";
 import MainGameContainer from "../components/MainGameContainer";
@@ -14,7 +12,6 @@ import generateNumberToGuess from "../utils/generateNumber";
 import addRecordToHistory from "../utils/addRecordToHistory";
 import countGuessed from "../utils/countGuessed";
 import getDigitsQuantity from "../utils/getDigitsQuantity";
-import levelToSpanish from "../utils/levelToSpanish";
 import checkPlayerHasWon from "../utils/checkPlayerHasWon";
 
 class Game extends Component {
@@ -172,16 +169,6 @@ class Game extends Component {
   }
 
   /**
-   * Renders an error if any
-   * @param {string} error - Error to display
-   */
-  renderErrorMessage(error) {
-    if (error) {
-      return <ErrorMessage error={error} />;
-    }
-  }
-
-  /**
    * Shows the user the level box where it can choose a level
    * If the user already chose one, hide it with a nice effect.
    */
@@ -217,11 +204,10 @@ class Game extends Component {
             digitsQuantity={this.state.digitsQuantity}
             numberBeingGuessed={this.state.numberBeingGuessed}
             canGuessBeSent={this.state.canGuessBeSent}
+            error={this.state.error}
+            level={this.state.level}
           />
 
-          {/* <Level level={levelToSpanish(this.state.level)}/ > */}
-
-          {this.renderErrorMessage(this.state.error)}
           {this.renderVictoryMessage(this.state.hasPlayerWon)}
 
           <SendAttemptButton
@@ -229,7 +215,7 @@ class Game extends Component {
             canGuessBeSent={this.state.canGuessBeSent}
           />
 
-          <History history={this.state.history} />
+          <History history={this.state.history} level={this.state.level} />
         </div>
       </div>
     );

@@ -1,6 +1,5 @@
 .main-game-container {
-  box-shadow: 16px 19px 31  px #a8a8a8;
-  background-color: $lavenderColor;
+  box-shadow: 16px 19px 31px #a8a8a8;
   width: 60%;
   border-radius: 10px;
   overflow: hidden;
@@ -9,8 +8,8 @@
     position: absolute;
     width: 10rem;
     font-size: 3.5rem;
-    background-color: $aquaColor;
     color: $colorWhite;
+    z-index: 200;
 
     &--digits-guessed {
       top: 0;
@@ -20,7 +19,6 @@
       padding-top: .5rem;
       -webkit-clip-path: polygon(0 0, 0% 100%, 100% 0);
       clip-path: polygon(0 0, 0% 100%, 100% 0);
-
     }
 
     &--placements-guessed {
@@ -76,7 +74,6 @@
       text-align: center;
       border: none;
       background-color: $colorWhite;
-      color: $lavenderColor;
 
       &:focus {
         outline: none;
@@ -84,4 +81,26 @@
     }
   }
 
+  .error-message {
+    position: absolute;
+    right: 0;
+    left: 0;
+    z-index: 20;
+    text-align: center;
+    font-weight: 700;
+    letter-spacing: 1px;
+    padding: 1rem;
+    font-size: 2rem;
+    background-color: $colorWhite;
+    transition: all .4s linear;
+    height: 50px;
+
+    &--active {
+      bottom: 0;
+    }
+
+    &--inactive {
+      bottom: -100px;
+    }
+  }
 }

@@ -1,0 +1,36 @@
+.main-game-container.lottery-level-theme {
+  background-color: $crimsonSkyColor;
+
+  .status {
+    // Corners color
+    background-color: $sunshineColor;
+  }
+
+  .inputs-box {
+    &__digit-input {
+      // Input color
+      color: $crimsonSkyColor;
+    }
+  }
+
+  .error-message {
+    color: $crimsonSkyColor;
+  }
+
+}
+
+.history.lottery-level-theme {
+  background-color: $crimsonSkyColor;
+
+  ul {
+    li:not(:last-child) {
+      // List item separator color
+      border-bottom: 1px solid darken($crimsonSkyColor, 20);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    // Scrollbar color
+    background: $crimsonSkyColor;
+  }
+}

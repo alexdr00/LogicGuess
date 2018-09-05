@@ -1,0 +1,36 @@
+.main-game-container.easy-level-theme {
+  background-color: $lavenderColor;
+
+  .status {
+    // Corners color
+    background-color: $aquaColor;
+  }
+
+  .inputs-box {
+    &__digit-input {
+      // Input color
+      color: $lavenderColor;
+    }
+  }
+
+  .error-message {
+    color: $lavenderColor;
+  }
+
+}
+
+.history.easy-level-theme {
+  background-color: $lavenderColor;
+
+  ul {
+    li:not(:last-child) {
+      // List item separator color
+      border-bottom: 1px solid darken($lavenderColor, 20);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    // Scrollbar color
+    background: $lavenderColor;
+  }
+}

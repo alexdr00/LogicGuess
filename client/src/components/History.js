@@ -1,14 +1,18 @@
 import React from 'react';
 
+import defineTheme from '../utils/defineTheme';
+
 const History = (props) => {
-  const renderHistories = (history) => {
-    return history.map(record => <li key={history.indexOf(record)}>{record}</li>)
+  const historyStatus = props.history != false ? 'shown' : '';
+
+  const renderHistory = (history) => {
+    return history.map(record => <li key={history.indexOf(record)} className="history__item">{record}</li>)
   }
 
   return (
-    <div className="history">
+    <div className={`history history--${historyStatus} ${defineTheme(props.level)}`}>
       <ul>
-        {renderHistories(props.history)}
+        {renderHistory(props.history)}
       </ul>
     </div>
   );

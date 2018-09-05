@@ -1,0 +1,36 @@
+.main-game-container.hard-level-theme {
+  background-color: $sunshineColor;
+
+  .status {
+    // Corners color
+    background-color: $crimsonSkyColor;
+  }
+
+  .inputs-box {
+    &__digit-input {
+      // Input color
+      color: $sunshineColor;
+    }
+  }
+
+  .error-message {
+    color: $sunshineColor;
+  }
+
+}
+
+.history.hard-level-theme {
+  background-color: $sunshineColor;
+
+  ul {
+    li:not(:last-child) {
+      // List item separator color
+      border-bottom: 1px solid darken($sunshineColor, 20);
+    }
+  }
+
+  &::-webkit-scrollbar-track {
+    // Scrollbar color
+    background: $sunshineColor;
+  }
+}

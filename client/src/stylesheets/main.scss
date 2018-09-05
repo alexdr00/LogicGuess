@@ -9,6 +9,7 @@
 
 @import 'components/levels-box';
 @import 'components/inputs-box';
+@import 'components/history';
 @import 'components/main-game-container';
 
 @import 'layout/general';
@@ -16,3 +17,8 @@
 @import 'layout/footer';
 
 @import 'pages/game';
+
+@import 'themes/easy-level-theme';
+@import 'themes/moderate-level-theme';
+@import 'themes/hard-level-theme';
+@import 'themes/lottery-level-theme';
