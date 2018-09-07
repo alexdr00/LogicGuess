@@ -2,9 +2,9 @@
 import React, { Component } from "react";
 import ChooseLevelBox from "../components/ChooseLevel";
 import History from "../components/History";
-import VictoryMessage from "../components/VictoryMessage";
-import SendAttemptButton from "../components/SendAttemptButton";
+import VictoryMessageBox from "../components/VictoryMessageBox";
 import MainGameContainer from "../components/MainGameContainer";
+import Confetti from "react-dom-confetti";
 
 // Dependencies
 import * as validate from "../utils/inputValidations";
@@ -21,6 +21,20 @@ class Game extends Component {
     this.handleLevelChoose = this.handleLevelChoose.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmitAttempt = this.handleSubmitAttempt.bind(this);
+
+    this.confettiConfig = {
+      angle: 270,
+      spread: 289,
+      startVelocity: 35,
+      elementCount: 178,
+      decay: 0.9,
+      colors: [
+        '#6bbaa7',
+        '#fba100',
+        '#cf6766',
+        '#6c648b',
+      ]
+    };
 
     this.state = {
       attempts: 0,
@@ -170,7 +184,7 @@ class Game extends Component {
   }
 
   /**
-   * Shows the user the level box where it can choose a level
+   * Shows the user the level box where they can choose a level
    * If the user already chose one, hide it with a nice effect.
    */
   renderChooseLevelBox() {
@@ -181,9 +195,15 @@ class Game extends Component {
     return <ChooseLevelBox hide />;
   }
 
-  renderVictoryMessage(hasUserWon) {
-    if (hasUserWon) {
-      return <VictoryMessage />;
+  renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess) {
+    if (hasPlayerWon) {
+      return (
+        <VictoryMessageBox
+          attempts={attempts}
+          level={level}
+          numberToGuess={numberToGuess}
+        />
+      );
     }
   }
 
@@ -210,7 +230,12 @@ class Game extends Component {
             handleSubmitAttempt={this.handleSubmitAttempt}
           />
 
-          {this.renderVictoryMessage(this.state.hasPlayerWon)}
+          {this.renderVictoryMessage(
+            this.state.hasPlayerWon,
+            this.state.attempts,
+            this.state.level,
+            this.state.numberToGuess,
+          )}
 
           <History
             history={this.state.history}
@@ -218,6 +243,14 @@ class Game extends Component {
             digitsGuessed={this.state.digitsGuessed}
             isLotteryLevel={this.state.isLotteryLevel}
           />
+
+          {/* Confetti when user wins */}
+          <Confetti
+            active={ this.state.hasPlayerWon }
+            className="confetti"
+            config={ this.confettiConfig }
+          />
+
         </div>
       </div>
     );

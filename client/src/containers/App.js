@@ -12,8 +12,9 @@ import Footer from '../components/Footer';
 // Font awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { fab } from '@fortawesome/free-brands-svg-icons';
 // Make solid icons available to all the components
-library.add(fas);
+library.add(fas, fab);
 
 class App extends Component {
   render() {

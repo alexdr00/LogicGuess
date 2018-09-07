@@ -42,3 +42,21 @@
     background: $aquaColor;
   }
 }
+
+.victory-message-box.moderate-level-theme {
+  .victory-message-box__title {
+    background-color: $lavenderColor;
+  }
+
+  .victory-message-box__statistics {
+    background-color: $aquaColor;
+  }
+
+  .victory-message-box__button {
+    background-color: $crimsonSkyColor;
+  }
+
+  .victory-message-box__button-title {
+    background-color: $sunshineColor;
+  }
+}

@@ -43,3 +43,21 @@
     background: $crimsonSkyColor;
   }
 }
+
+.victory-message-box.lottery-level-theme {
+  .victory-message-box__title {
+    background-color: $sunshineColor;
+  }
+
+  .victory-message-box__statistics {
+    background-color: $crimsonSkyColor;
+  }
+
+  .victory-message-box__button {
+    background-color: $lavenderColor;
+  }
+
+  .victory-message-box__button-title {
+    background-color: $aquaColor;
+  }
+}

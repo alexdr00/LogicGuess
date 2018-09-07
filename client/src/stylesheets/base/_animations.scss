@@ -68,3 +68,15 @@
     transform: scale(1);
   }
 }
+
+@keyframes showVictoryMessage {
+  0% {
+    transform: translate(-50%, -50%) rotate(180deg) scale(0);
+  }
+
+
+  100% {
+    transform: translate(-50%, -50%) rotate(0deg) scale(1);
+
+  }
+}
