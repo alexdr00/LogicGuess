@@ -7,7 +7,16 @@ const History = (props) => {
 
   const renderPlacementsGuessedHistory = (isLotteryLevel, placementsGuessed) => {
     if (isLotteryLevel) {
-      return <span className="history__placements-guessed">{placementsGuessed}</span>
+      return (
+        <span
+          onMouseEnter={() => props.handleStatusHover('Colocaciones Adivinadas')}
+          onMouseLeave={() => props.handleStatusHover(false)}
+          className="history__placements-guessed"
+        >
+
+          {placementsGuessed}
+        </span>
+      );
     }
   }
 
@@ -19,7 +28,13 @@ const History = (props) => {
 
         {historyItem.record}
 
-        <span className="history__digits-guessed">{historyItem.digitsGuessed}</span>
+        <span
+          onMouseEnter={() => props.handleStatusHover('Dígitos Adivinados')}
+          onMouseLeave={() => props.handleStatusHover(false)}
+          className="history__digits-guessed">
+
+          {historyItem.digitsGuessed}
+        </span>
       </li>
     );
   }

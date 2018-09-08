@@ -1,8 +1,14 @@
 import React from 'react';
 
 const PlacementsGuessed = (props) => {
+  const componentLabel = "Colocaciones Adivinadas";
+
   return (
-    <div className="status status--placements-guessed">
+    <div
+      onMouseEnter={() => props.onStatusHover(componentLabel)}
+      onMouseLeave={() => props.onStatusHover(false)}
+      className="status status--placements-guessed"
+    >
       {props.placementsGuessed}
     </div>
   );

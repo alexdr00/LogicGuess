@@ -24,6 +24,7 @@ const MainGameContainer = (props) => {
         attempts={props.attempts}
         canGuessBeSent={props.canGuessBeSent}
         handleSubmitAttempt={props.handleSubmitAttempt}
+        handleStatusHover={props.handleStatusHover}
       />
 
       <ErrorMessage error={props.error} />

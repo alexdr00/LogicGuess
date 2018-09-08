@@ -3,7 +3,7 @@ import StatisticsPanel from './victory-box/StatisticsPanel';
 import VictoryBoxButton from './victory-box/VictoryBoxButton';
 import levelToSpanish from '../utils/levelToSpanish';
 import defineTheme from '../utils/defineTheme';
-
+import formatTimeElapsed from '../utils/formatTimeElapsed';
 
 const VictoryMessage = (props) => {
   return (
@@ -25,21 +25,22 @@ const VictoryMessage = (props) => {
 
       <StatisticsPanel
         label="Tiempo Transcurrido"
-        value="N/A"
+        value={formatTimeElapsed(props.timeElapsed)}
       />
 
       <VictoryBoxButton
         label="Jugar otra vez"
         iconType="fas"
         icon="dice"
+        onClick={props.handleVictoryButtonClick}
       />
 
       <VictoryBoxButton
         label="Guardar puntaje"
         iconType="fab"
         icon="google-plus"
+        onClick={props.handleVictoryButtonClick}
       />
-
     </div>
   );
 };

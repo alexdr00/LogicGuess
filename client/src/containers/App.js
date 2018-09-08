@@ -13,7 +13,7 @@ import Footer from '../components/Footer';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { fab } from '@fortawesome/free-brands-svg-icons';
-// Make solid icons available to all the components
+// Make solid and brand icons available to all the components
 library.add(fas, fab);
 
 class App extends Component {

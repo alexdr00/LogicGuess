@@ -7,24 +7,30 @@ import ValidationSuccessful from "./ValidationSuccessful";
 const Status = (props) => {
   const renderPlacementsGuessed = (isLotteryLevel, placementsGuessed) => {
     if (isLotteryLevel) {
-      return <PlacementsGuessed placementsGuessed={placementsGuessed} />;
+      return <PlacementsGuessed
+        placementsGuessed={placementsGuessed}
+        onStatusHover={props.handleStatusHover} />;
     }
   }
 
   return (
     <div>
-      <DigitsGuessed digitsGuessed={props.digitsGuessed} />
+      <DigitsGuessed
+        onStatusHover={props.handleStatusHover}
+        digitsGuessed={props.digitsGuessed}
+      />
 
       {renderPlacementsGuessed(
         props.isLotteryLevel,
         props.placementsGuessed
       )}
 
-      <Attempts attempts={props.attempts} />
+      <Attempts attempts={props.attempts} onStatusHover={props.handleStatusHover}/>
 
       <ValidationSuccessful
         canGuessBeSent={props.canGuessBeSent}
         onSubmitAttempt={props.handleSubmitAttempt}
+        onStatusHover={props.handleStatusHover}
       />
     </div>
   );

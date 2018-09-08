@@ -5,6 +5,8 @@ import History from "../components/History";
 import VictoryMessageBox from "../components/VictoryMessageBox";
 import MainGameContainer from "../components/MainGameContainer";
 import Confetti from "react-dom-confetti";
+import Help from "../components/help/Help";
+import Timer from "../components/timer/Timer";
 
 // Dependencies
 import * as validate from "../utils/inputValidations";
@@ -21,6 +23,7 @@ class Game extends Component {
     this.handleLevelChoose = this.handleLevelChoose.bind(this);
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmitAttempt = this.handleSubmitAttempt.bind(this);
+    this.handleStatusHover = this.handleStatusHover.bind(this);
 
     this.confettiConfig = {
       angle: 270,
@@ -48,7 +51,9 @@ class Game extends Component {
       numberBeingGuessed: [],
       canGuessBeSent: false,
       hasPlayerWon: false,
-      error: null
+      error: null,
+      helpLabel: '',
+      timeElapsed: 0,
     };
   }
 
@@ -67,6 +72,9 @@ class Game extends Component {
       numberToGuess,
       digitsQuantity,
       isLotteryLevel: level === "lottery" ? true : false
+    }, () => {
+      // Focuses the first input
+      document.querySelector('.inputs-box__digit-input').focus();
     });
   }
 
@@ -183,6 +191,21 @@ class Game extends Component {
     return numberBeingGuessed;
   }
 
+  handleStatusHover(componentHovered) {
+    if (componentHovered) {
+      this.setState({ helpLabel: componentHovered });
+      return;
+    }
+
+    this.setState({ helpLabel: '' });
+  }
+
+  handleVictoryButtonClick(label) {
+    if (label === "Jugar otra vez") {
+      window.location.reload();
+    }
+  }
+
   /**
    * Shows the user the level box where they can choose a level
    * If the user already chose one, hide it with a nice effect.
@@ -195,15 +218,31 @@ class Game extends Component {
     return <ChooseLevelBox hide />;
   }
 
-  renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess) {
+  renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess, timeElapsed) {
     if (hasPlayerWon) {
       return (
         <VictoryMessageBox
           attempts={attempts}
           level={level}
           numberToGuess={numberToGuess}
+          timeElapsed={timeElapsed}
+          handleVictoryButtonClick={this.handleVictoryButtonClick}
+
         />
       );
+    }
+  }
+
+  countSeconds(secondsElapsed) {
+    setTimeout(() => {
+      this.setState({ timeElapsed: secondsElapsed + 1 })
+    }, 1000);
+  }
+
+  renderTimer(level, timeElapsed, hasPlayerWon) {
+    if (level && !hasPlayerWon) {
+      this.countSeconds(timeElapsed)
+      return <Timer level={level} timeElapsed={timeElapsed} />
     }
   }
 
@@ -221,20 +260,28 @@ class Game extends Component {
             placementsGuessed={this.state.placementsGuessed}
             attempts={this.state.attempts}
             isLotteryLevel={this.state.isLotteryLevel}
-            handleInputChange={this.handleInputChange}
             digitsQuantity={this.state.digitsQuantity}
             numberBeingGuessed={this.state.numberBeingGuessed}
             canGuessBeSent={this.state.canGuessBeSent}
             error={this.state.error}
             level={this.state.level}
+            handleInputChange={this.handleInputChange}
             handleSubmitAttempt={this.handleSubmitAttempt}
+            handleStatusHover={this.handleStatusHover}
           />
+
+          {this.renderTimer(
+            this.state.level,
+            this.state.timeElapsed,
+            this.state.hasPlayerWon
+          )}
 
           {this.renderVictoryMessage(
             this.state.hasPlayerWon,
             this.state.attempts,
             this.state.level,
             this.state.numberToGuess,
+            this.state.timeElapsed,
           )}
 
           <History
@@ -242,7 +289,10 @@ class Game extends Component {
             level={this.state.level}
             digitsGuessed={this.state.digitsGuessed}
             isLotteryLevel={this.state.isLotteryLevel}
+            handleStatusHover={this.handleStatusHover}
           />
+
+          <Help  help={this.state.helpLabel} />
 
           {/* Confetti when user wins */}
           <Confetti

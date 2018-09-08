@@ -11,6 +11,16 @@
     color: $colorWhite;
     z-index: 200;
 
+    // Question Mark
+    &::after {
+      content: "?";
+      font-size: 1.5rem;
+      position: absolute;
+      animation-iteration-count: infinite;
+      animation-duration: 1s;
+      animation-name: emphasizeQuestionMark;
+    }
+
     &--digits-guessed {
       top: 0;
       bottom: 50%;
@@ -62,6 +72,25 @@
       }
     }
 
+    // Question marks positions
+    &--digits-guessed::after {
+      right: 35%;
+    }
+
+    &--attempts::after {
+      left: 35%;
+    }
+
+    &--placements-guessed::after {
+      right: 35%;
+      bottom: 0;
+    }
+
+    &__validation::after {
+      content: none;
+    }
+
+    // Icons
     &__success-icon {
       animation-duration: 1s;
       animation-iteration-count: infinite;

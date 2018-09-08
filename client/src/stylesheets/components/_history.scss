@@ -22,13 +22,23 @@
   }
 
   &__digits-guessed {
+    position: relative;
     margin-left: 10px;
     padding: 0 5px;
     border-radius: 5px;
   }
 
+  &__digits-guessed::after,
+  &__placements-guessed::before {
+    content: "?";
+    position: absolute;
+    right: -3px;
+    font-size: 1.2rem;
+  }
+
   &__placements-guessed {
     margin-right: 10px;
+    position: relative;
     padding: 0 5px;
     border-radius: 5px;
   }

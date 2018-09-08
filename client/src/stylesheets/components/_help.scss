@@ -1,0 +1,19 @@
+.help {
+  background-color: $navColor;
+  border-bottom-right-radius: 10px;
+  padding: 20px;
+  position: absolute;
+  top: 0;
+  color: $colorWhite;
+  font-weight: 700;
+  z-index: -1;
+  left: -1%;
+
+  &--shown {
+    opacity: 1;
+  }
+
+  &--hidden {
+    opacity: 0;
+  }
+}

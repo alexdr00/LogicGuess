@@ -3,7 +3,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const VictoryBoxButton = (props) => {
   return (
-    <div className="victory-message-box__button">
+    <div onClick={() => props.onClick(props.label)} className="victory-message-box__button">
       <div className="victory-message-box__button-title">{props.label}</div>
         <FontAwesomeIcon
           icon={[props.iconType, props.icon]}
