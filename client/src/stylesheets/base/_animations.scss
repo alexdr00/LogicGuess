@@ -97,21 +97,12 @@
 
 @keyframes showManualSection1 {
   0% {
-    right: 100%;
+    opacity: 0;
   }
 
   100% {
-    right: -10%;
+    opacity: 1;
   }
 }
 
-@keyframes showManualSection2 {
-  0% {
-    left: 100%;
-  }
-
-  100% {
-    left: -10%;
-  }
-}
 

@@ -12,28 +12,26 @@
     font-weight: 700;
     text-align: left;
     z-index: -5;
+    animation-name: showManualSection1;
+    opacity: 0;
+    animation-fill-mode: forwards;
+    animation-duration: 1s;
 
     &--context,
     &--levels {
       position: relative;
-      right: 100%;
-      animation-duration: 1s;
-      animation-name: showManualSection1;
-      animation-fill-mode: forwards;
+      right: 10%;
     }
 
     &--rules,
     &--examples {
       position: relative;
-      left: 100%;
-      animation-duration: 1s;
-      animation-name: showManualSection2;
-      animation-fill-mode: forwards;
+      left: 10%;
     }
 
     &--context {
       background-color: $lavenderColor;
-
+      animation-delay: 0;
       ul {
         list-style-position: inside;
       }
@@ -41,13 +39,16 @@
 
     &--rules {
       background-color: $aquaColor;
+      animation-delay: 1s;
+
     }
     &--levels {
       background-color: $sunshineColor;
+      animation-delay: 2s;
     }
     &--examples {
       background-color: $crimsonSkyColor;
-
+      animation-delay: 3s;
       .guessed {
         background-color: $sunshineColor;
         border-radius: 5px;
