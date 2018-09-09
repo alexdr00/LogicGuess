@@ -1,0 +1,68 @@
+.manual {
+  width: 70%;
+  margin: auto;
+  margin-top: 5rem;
+
+  &__section {
+    box-shadow: 0px 9px 33px #959595;
+    margin-bottom: 50px;
+    border-radius: 10px;
+    color: $colorWhite;
+    padding: 3rem;
+    font-weight: 700;
+    text-align: left;
+    z-index: -5;
+
+    &--context,
+    &--levels {
+      position: relative;
+      right: 100%;
+      animation-duration: 1.5s;
+      animation-name: showManualSection1;
+      animation-fill-mode: forwards;
+    }
+
+    &--rules,
+    &--examples {
+      position: relative;
+      left: 100%;
+      animation-duration: 1.5s;
+      animation-name: showManualSection2;
+      animation-fill-mode: forwards;
+    }
+
+    &--context {
+      background-color: $lavenderColor;
+
+      ul {
+        list-style-position: inside;
+      }
+    }
+
+    &--rules {
+      background-color: $aquaColor;
+    }
+    &--levels {
+      background-color: $sunshineColor;
+    }
+    &--examples {
+      background-color: $crimsonSkyColor;
+
+      .guessed {
+        background-color: $sunshineColor;
+        border-radius: 5px;
+      }
+    }
+
+  }
+
+  &__title {
+    margin-left: 10%;
+  }
+
+  &__subtitle {
+    margin-left: 5%;
+    font-size: 2rem;
+  }
+
+}

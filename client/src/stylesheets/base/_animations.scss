@@ -95,3 +95,31 @@
   }
 }
 
+@keyframes showManualSection1 {
+  0% {
+    right: 100%;
+  }
+
+  50% {
+    right: -15%;
+  }
+
+  100% {
+    right: -10%;
+  }
+}
+
+@keyframes showManualSection2 {
+  0% {
+    left: 100%;
+  }
+
+  50% {
+    left: -15%;
+  }
+
+  100% {
+    left: -10%;
+  }
+}
+
