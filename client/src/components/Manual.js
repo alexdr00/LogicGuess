@@ -24,6 +24,7 @@ class Manual extends Component {
               <li>El juego te dirá la cantidad de dígitos que adivinaste</li>
               <li>El orden en que coloques los dígitos no importa. Solo debes adivinarlos  (excepto en nivel Lotería)
               </li>
+              <li>Cada vez que reinicies el juego, se generará un nuevo número</li>
               <li>
                 Mientras menos intentos necesites para ganar, estarás mejor ubicado en la tabla de posiciones (comparado con otros jugadores)
               </li>
