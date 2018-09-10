@@ -7,7 +7,7 @@ import intToArray from './intToArray';
  *
  * Generates another number if the previous one had duplicate digits
  *
- * @param {int} digitsQuantity - how many digits should be generated
+ * @param {int} digitsQuantity - quantity of digits that should be generated
  * @return {array} array of digits the user has to guess.
  */
 const generateNumberToGuess = (digitsQuantity) => {

@@ -1,6 +1,6 @@
 import React from 'react';
-import defineTheme from '../../utils/defineTheme';
-import formatTimeElapsed from '../../utils/formatTimeElapsed';
+import defineTheme from '../../lib/defineTheme';
+import formatTimeElapsed from '../../lib/formatTimeElapsed';
 
 const Timer = (props) => {
   return (

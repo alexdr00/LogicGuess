@@ -1,11 +1,12 @@
 import React from 'react';
 import InputsContainer from "./InputsContainer";
-import ErrorMessage from "../components/ErrorMessage";
-import Status from "./Status";
+import ErrorMessage from "../error/ErrorMessage";
+import Status from "../status/Status";
 
-import defineTheme from '../utils/defineTheme';
+import defineTheme from '../../lib/defineTheme';
 
 const MainGameContainer = (props) => {
+  // Show game container just when the user choose a level
   const mainGameContainerStatus = props.level ? 'shown' : '';
 
   return (

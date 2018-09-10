@@ -1,5 +1,5 @@
 import React from 'react';
-import LevelButton from './LevelButton';
+import LevelButton from '../level-selection/LevelButton';
 
 const ChooseLevelBox = (props) => {
   const componentStatus = props.show ? 'shown' : 'hidden';

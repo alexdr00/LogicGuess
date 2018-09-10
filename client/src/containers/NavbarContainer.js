@@ -1,7 +1,5 @@
 import React, { Component } from 'react';
-import NavbarItem from '../components/NavbarItem';
-
-// import { connect } from 'react-redux';
+import NavbarItem from '../components/layout/NavbarItem';
 
 class Navbar extends Component {
 
@@ -12,12 +10,6 @@ class Navbar extends Component {
           icon="user"
           cssModifier="profile"
           itemName="Perfil"
-          route="/profile" />
-
-        <NavbarItem
-          icon="home"
-          cssModifier="home"
-          itemName="Inicio"
           route="/" />
 
         <NavbarItem

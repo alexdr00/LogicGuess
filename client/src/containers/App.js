@@ -5,9 +5,8 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './NavbarContainer';
 import Game from './Game';
 import Profile from './Profile';
-import Home from '../components/Home';
-import Manual from '../components/Manual';
-import Footer from '../components/Footer';
+import Manual from '../components/main/Manual';
+import Footer from '../components/layout/Footer';
 
 // Font awesome
 import { library } from '@fortawesome/fontawesome-svg-core';
@@ -23,8 +22,7 @@ class App extends Component {
         <div className="app-container">
           <Navbar></Navbar>
 
-          <Route exact path="/" component={Home}/>
-          <Route exact path="/profile" component={Profile}/>
+          <Route exact path="/" component={Profile}/>
           <Route exact path="/manual" component={Manual} />
           <Route exact path="/game" component={Game}/>
 

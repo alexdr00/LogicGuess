@@ -1,6 +1,7 @@
 import React from 'react';
 
 const Attempts = (props) => {
+  // Label to show in the help
   const componentLabel = "Intentos";
 
   return (

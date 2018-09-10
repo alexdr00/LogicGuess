@@ -5,6 +5,7 @@ import DigitsGuessed from "./DigitsGuessed";
 import ValidationSuccessful from "./ValidationSuccessful";
 
 const Status = (props) => {
+  // Render this status just when the user chooses lottery level
   const renderPlacementsGuessed = (isLotteryLevel, placementsGuessed) => {
     if (isLotteryLevel) {
       return <PlacementsGuessed

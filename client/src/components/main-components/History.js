@@ -1,10 +1,16 @@
 import React from 'react';
 
-import defineTheme from '../utils/defineTheme';
+import defineTheme from '../../lib/defineTheme';
 
 const History = (props) => {
+  // Show just when user submits their first guess
   const historyStatus = props.history != false ? 'shown' : '';
 
+  /**
+   * Show this status history just when user chose lottery level
+   * @param {boolean} isLotteryLevel - true if user chose lottery level
+   * @param {int} placementsGuessed - quantity of placements the user guessed
+   */
   const renderPlacementsGuessedHistory = (isLotteryLevel, placementsGuessed) => {
     if (isLotteryLevel) {
       return (

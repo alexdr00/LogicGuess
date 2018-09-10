@@ -1,9 +1,9 @@
 import React from 'react';
-import StatisticsPanel from './victory-box/StatisticsPanel';
-import VictoryBoxButton from './victory-box/VictoryBoxButton';
-import levelToSpanish from '../utils/levelToSpanish';
-import defineTheme from '../utils/defineTheme';
-import formatTimeElapsed from '../utils/formatTimeElapsed';
+import StatisticsPanel from '../victory-box/StatisticsPanel';
+import VictoryBoxButton from '../victory-box/VictoryBoxButton';
+import levelToSpanish from '../../lib/levelToSpanish';
+import defineTheme from '../../lib/defineTheme';
+import formatTimeElapsed from '../../lib/formatTimeElapsed';
 
 const VictoryMessage = (props) => {
   return (

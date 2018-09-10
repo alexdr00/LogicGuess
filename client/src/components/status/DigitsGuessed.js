@@ -1,6 +1,7 @@
 import React from 'react';
 
 const DigitsGuessed = (props) => {
+  // Label to show in the help
   const componentLabel = "Dígitos Adivinados";
 
   return (

@@ -3,14 +3,12 @@ import SendAttemptButton from "./SendAttemptButton";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const ValidationSuccessful = (props) => {
-  const config = {
-    angle: 94,
-    spread: 107,
-    startVelocity: 55,
-    elementCount: 108,
-    decay: 0.87
-  };
-
+  /**
+   * Shows a success icon when the user has no error in their input.
+   * If the user has errors shows an X instead.
+   * @param {boolean} canGuessBeSent - true if user has no errors in their input
+   * @param {function} onSubmitAttempt - Handles attempt submission
+   */
   const renderValidationStatus = (canGuessBeSent, onSubmitAttempt) => {
     if (canGuessBeSent) {
       return (

@@ -1,20 +1,24 @@
-// Components
+// Third Party dependencies
 import React, { Component } from "react";
-import ChooseLevelBox from "../components/ChooseLevel";
-import History from "../components/History";
-import VictoryMessageBox from "../components/VictoryMessageBox";
-import MainGameContainer from "../components/MainGameContainer";
 import Confetti from "react-dom-confetti";
+
+// Components
+import ChooseLevelBox from "../components/main-components/ChooseLevel";
+import History from "../components/main-components/History";
+import VictoryMessageBox from "../components/main-components/VictoryMessageBox";
+import MainGameContainer from "../components/main-components/MainGameContainer";
 import Help from "../components/help/Help";
 import Timer from "../components/timer/Timer";
 
 // Dependencies
-import * as validate from "../utils/inputValidations";
-import generateNumberToGuess from "../utils/generateNumber";
-import addRecordToHistory from "../utils/addRecordToHistory";
-import countGuessed from "../utils/countGuessed";
-import getDigitsQuantity from "../utils/getDigitsQuantity";
-import checkPlayerHasWon from "../utils/checkPlayerHasWon";
+import * as validate from "../lib/inputValidations";
+import generateNumberToGuess from "../lib/generateNumber";
+import addRecordToHistory from "../lib/addRecordToHistory";
+import countGuessed from "../lib/countGuessed";
+import getDigitsQuantity from "../lib/getDigitsQuantity";
+import checkPlayerHasWon from "../lib/checkPlayerHasWon";
+
+
 
 class Game extends Component {
   constructor(props) {
@@ -25,6 +29,8 @@ class Game extends Component {
     this.handleSubmitAttempt = this.handleSubmitAttempt.bind(this);
     this.handleStatusHover = this.handleStatusHover.bind(this);
 
+    // Configuration for the confetti, which is shown
+    // when the user wins.
     this.confettiConfig = {
       angle: 270,
       spread: 289,
@@ -93,7 +99,7 @@ class Game extends Component {
     );
 
     // ** Input Validations **
-    // checks if input is a blank space
+    // checks out if input is a blank space
     if (inputDigit.trim() === "") {
       this.setState({ canGuessBeSent: false });
       return;
@@ -130,6 +136,9 @@ class Game extends Component {
     }
   }
 
+  /**
+   * When the user submits their guess
+   */
   handleSubmitAttempt(event) {
     event.preventDefault();
 
@@ -191,6 +200,10 @@ class Game extends Component {
     return numberBeingGuessed;
   }
 
+  /**
+   * When the user hovers on certain components, shows help
+   * describing the component.
+   */
   handleStatusHover(componentHovered) {
     if (componentHovered) {
       this.setState({ helpLabel: componentHovered });
@@ -200,6 +213,12 @@ class Game extends Component {
     this.setState({ helpLabel: '' });
   }
 
+  /**
+   * When the user wins two buttons are shown:
+   * play again or submit score.
+   * Executes certain actions accordingly.
+   * @param {string} label - label of button clicked
+   */
   handleVictoryButtonClick(label) {
     if (label === "Jugar otra vez") {
       window.location.reload();
@@ -218,6 +237,9 @@ class Game extends Component {
     return <ChooseLevelBox hide />;
   }
 
+  /**
+   * When the user wins, show the victory box message.
+   */
   renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess, timeElapsed) {
     if (hasPlayerWon) {
       return (
@@ -227,18 +249,24 @@ class Game extends Component {
           numberToGuess={numberToGuess}
           timeElapsed={timeElapsed}
           handleVictoryButtonClick={this.handleVictoryButtonClick}
-
         />
       );
     }
   }
 
+  /**
+   * Increase each second.
+   * @param {int} secondsElapsed - Seconds elapsed while the user plays.
+   */
   countSeconds(secondsElapsed) {
     setTimeout(() => {
       this.setState({ timeElapsed: secondsElapsed + 1 })
     }, 1000);
   }
 
+  /**
+   * Starts to count the time when the user chooses a level.
+   */
   renderTimer(level, timeElapsed, hasPlayerWon) {
     if (level && !hasPlayerWon) {
       this.countSeconds(timeElapsed)
@@ -246,13 +274,13 @@ class Game extends Component {
     }
   }
 
+  /**
+   * Joining all together.
+   */
   render() {
     return (
       <div className="main-content">
         <div className="game">
-          {/* Trap (just in development) */}
-          {console.log(this.state.numberToGuess)}
-
           {this.renderChooseLevelBox()}
 
           <MainGameContainer
@@ -292,9 +320,8 @@ class Game extends Component {
             handleStatusHover={this.handleStatusHover}
           />
 
-          <Help  help={this.state.helpLabel} />
+          <Help help={this.state.helpLabel} />
 
-          {/* Confetti when user wins */}
           <Confetti
             active={ this.state.hasPlayerWon }
             className="confetti"
