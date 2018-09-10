@@ -5,7 +5,7 @@ import { BrowserRouter, Route } from 'react-router-dom';
 import Navbar from './NavbarContainer';
 import Game from './Game';
 import Profile from './Profile';
-import Manual from '../components/main/Manual';
+import Manual from '../components/main-components/Manual';
 import Footer from '../components/layout/Footer';
 
 // Font awesome
