@@ -1,5 +1,5 @@
 /**
- * Checks if the user guessed all digits and placements (just on lottery level)
+ * Checks if the user guessed all digits and placements (just in lottery level)
  *
  * @param {int} digitsGuessed - Quantity of digits the player guessed
  * @param {int} placementsGuessed - Quantity of placements the player guessed

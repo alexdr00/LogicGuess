@@ -20,7 +20,7 @@ const hasRequiredDigits = (digitsQuantity, numberBeingGuessed) => {
  * @return {boolean} true if the number has duplicate digits, false otherwise.
  */
 const hasDuplicateDigits = (numberArr) => {
-  // If numerArr is int, convert to array
+  // If numberArr is int, convert to array
   if (Number.isInteger(numberArr)) {
     numberArr = numberArr.toString().split('');
   }

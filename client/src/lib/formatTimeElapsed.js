@@ -2,7 +2,7 @@ import moment from 'moment';
 require("moment-duration-format");
 
 /**
- * Format seconds elapsed to time (hh:mm:ss).
+ * Format seconds elapsed (hh:mm:ss).
  * @param {int} seconds - seconds elapsed
  */
 const formatTimeElapsed = (seconds) => {

@@ -6,7 +6,7 @@ import Status from "../status/Status";
 import defineTheme from '../../lib/defineTheme';
 
 const MainGameContainer = (props) => {
-  // Show game container just when the user choose a level
+  // Show game container just when the user chooses a level
   const mainGameContainerStatus = props.level ? 'shown' : '';
 
   return (
