@@ -8,6 +8,7 @@ const keys = require('./config/dev');
 
 // Models
 require('./models/User');
+require('./models/Score');
 
 // Connecting to db
 mongoose.connect(keys.mongoURI);
@@ -37,5 +38,7 @@ app.use(passport.session());
 
 // *** Routes ***
 require('./routes/authRoutes')(app);
+require('./routes/scoreRoutes')(app);
+require('./routes/userRoutes')(app);
 
 app.listen(5000, () => console.log('running server'));

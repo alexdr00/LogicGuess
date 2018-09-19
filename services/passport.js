@@ -28,7 +28,16 @@ passport.use(
         return done(null, existingUser);
       }
 
-      const user = await new User({ googleId: profile.id }).save();
+      const email = profile.emails[0].value;
+      // Email's first section (before @)
+      const username = email.split('@')[0];
+
+      const user = await new User({
+        username,
+        googleId: profile.id,
+        name: profile.name.givenName,
+      }).save();
+
       done(null, user);
     }
   )

@@ -1,6 +1,7 @@
 // Third Party dependencies
 import React, { Component } from "react";
 import Confetti from "react-dom-confetti";
+import { connect } from 'react-redux';
 
 // Components
 import ChooseLevelBox from "../components/main-components/ChooseLevel";
@@ -18,8 +19,6 @@ import countGuessed from "../lib/countGuessed";
 import getDigitsQuantity from "../lib/getDigitsQuantity";
 import checkPlayerHasWon from "../lib/checkPlayerHasWon";
 
-
-
 class Game extends Component {
   constructor(props) {
     super(props);
@@ -28,6 +27,7 @@ class Game extends Component {
     this.handleInputChange = this.handleInputChange.bind(this);
     this.handleSubmitAttempt = this.handleSubmitAttempt.bind(this);
     this.handleStatusHover = this.handleStatusHover.bind(this);
+    this.handleVictoryButtonClick = this.handleVictoryButtonClick.bind(this);
 
     // Configuration for the confetti, which is shown
     // when the user wins.
@@ -84,11 +84,6 @@ class Game extends Component {
     });
   }
 
-  /**
-   * Handles input when user types something in
-   * @param {object} event - Event
-   * @param {int} index - Input placement
-   */
   handleInputChange(event, index) {
     const inputDigit = event.target.value;
     const digitsQuantity = this.state.digitsQuantity;
@@ -129,7 +124,7 @@ class Game extends Component {
       event.target.nextSibling.focus();
     }
 
-    // If everything is alright allow submitting the form
+    // If everything is alright, allow submitting the form
     if (validate.hasRequiredDigits(digitsQuantity, numberBeingGuessed)) {
       this.setState({ canGuessBeSent: true });
       return;
@@ -219,9 +214,26 @@ class Game extends Component {
    * Executes certain actions accordingly.
    * @param {string} label - label of button clicked
    */
-  handleVictoryButtonClick(label) {
-    if (label === "Jugar otra vez") {
+  handleVictoryButtonClick(id) {
+    if (id === "playAgain") {
       window.location.reload();
+    }
+
+    if (id === "saveScore") {
+      const scoreData = {
+        attempts: this.state.attempts,
+        level: this.state.level,
+        timeElapsed: this.state.timeElapsed,
+      }
+
+      window.sessionStorage.setItem('scoreData', JSON.stringify(scoreData));
+
+      if (this.props.auth._id) {
+        return window.location.replace('/');
+      }
+
+      window.location.replace('/auth/google');
+
     }
   }
 
@@ -237,9 +249,6 @@ class Game extends Component {
     return <ChooseLevelBox hide />;
   }
 
-  /**
-   * When the user wins, show the victory box message.
-   */
   renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess, timeElapsed) {
     if (hasPlayerWon) {
       return (
@@ -254,10 +263,6 @@ class Game extends Component {
     }
   }
 
-  /**
-   * Increase each second.
-   * @param {int} secondsElapsed - Seconds elapsed while the user plays.
-   */
   countSeconds(secondsElapsed) {
     setTimeout(() => {
       this.setState({ timeElapsed: secondsElapsed + 1 })
@@ -281,6 +286,8 @@ class Game extends Component {
     return (
       <div className="main-content">
         <div className="game">
+          {console.log(this.state.numberToGuess)}
+
           {this.renderChooseLevelBox()}
 
           <MainGameContainer
@@ -334,4 +341,8 @@ class Game extends Component {
   }
 }
 
-export default Game;
+const mapStateToProps = (state) => {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)(Game);

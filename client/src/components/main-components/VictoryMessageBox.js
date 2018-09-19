@@ -30,6 +30,7 @@ const VictoryMessage = (props) => {
 
       <VictoryBoxButton
         label="Jugar otra vez"
+        id="playAgain"
         iconType="fas"
         icon="dice"
         onClick={props.handleVictoryButtonClick}
@@ -37,6 +38,7 @@ const VictoryMessage = (props) => {
 
       <VictoryBoxButton
         label="Guardar puntaje"
+        id="saveScore"
         iconType="fab"
         icon="google-plus"
         onClick={props.handleVictoryButtonClick}
