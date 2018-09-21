@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import { log } from 'util';
+import ScoresFilter from '../components/scores/ScoresFilter';
+import TableScores from '../components/scores/TableScores';
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -8,46 +9,42 @@ class Leaderboard extends Component {
 
     this.state = {
       scores: [],
-    }
+      filter: '',
+    };
+
+    this.handleFilterClick = this.handleFilterClick.bind(this);
   }
 
   componentDidMount() {
     axios.get('/api/get-scores').then(result => {
-      const scores = result.data.allScores;
+      const scores = result.data;
       this.setState({ scores });
     });
   }
 
-  renderAllScores() {
-    this.state.scores.map(score => {
-        return (
-        <tr>
-          <td>{score.level}</td>
-          <td>{score.attempts}</td>
-          <td>{score.timeElapsed}</td>
-        </tr>
-      );
-    });
+  handleFilterClick(fieldShown) {
+    this.setState({ filter: fieldShown });
   }
 
   render() {
     return (
       <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Nivel</th>
-              <th>Intentos</th>
-              <th>Tiempo</th>
-            </tr>
-          </thead>
-          <tbody>
-            {this.renderAllScores()}
-          </tbody>
+        <ScoresFilter buttonLabel="Fácil" onFilterClick={this.handleFilterClick} fieldShown='easy' />
 
-        </table>
+        <ScoresFilter buttonLabel="Moderado" onFilterClick={this.handleFilterClick} fieldShown='moderate' />
+
+        <ScoresFilter buttonLabel="Difícil" onFilterClick={this.handleFilterClick} fieldShown='hard' />
+
+        <ScoresFilter buttonLabel="Lotería" onFilterClick={this.handleFilterClick} fieldShown='lottery' />
+
+        <ScoresFilter buttonLabel="Tus Puntajes" onFilterClick={this.handleFilterClick} fieldShown='userScores' />
+
+        <ScoresFilter buttonLabel="Todos" onFilterClick={this.handleFilterClick} fieldShown='all' />
+
+        <TableScores scores={this.state.scores} />
+
       </div>
-    );
+    )
   }
 }
 

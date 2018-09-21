@@ -5,6 +5,7 @@ const scoreSchema = new Schema({
   level: String,
   attempts: Number,
   timeElapsed: Number,
+  levelNumber: Number,
   _user: { type: Schema.Types.ObjectId, ref: 'User' },
 });
 
