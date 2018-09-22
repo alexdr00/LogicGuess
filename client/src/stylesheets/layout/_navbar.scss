@@ -22,7 +22,7 @@
     position: relative;
 
     // When the item is hovered, show tag
-    &--profile:hover .navigation__tag--profile {
+    &--leaderboard:hover .navigation__tag--leaderboard {
       left: 90%;
     }
     &--home:hover .navigation__tag--home {
@@ -36,7 +36,7 @@
     }
 
     // When the item is hovered, change its color
-    &--profile:hover .navigation__icon--profile {
+    &--leaderboard:hover .navigation__icon--leaderboard {
       color: $aquaColor;
     }
     &--home:hover .navigation__icon--home {
@@ -68,7 +68,7 @@
     left: -200%;
     z-index: -1;
 
-    &--profile {
+    &--leaderboard {
       background-color: $aquaColor;
     }
     &--home {
@@ -88,7 +88,7 @@
     // Inactive
     color: $colorWhite;
 
-    &--profile--active > *:not(.navigation__tag) {
+    &--leaderboard--active > *:not(.navigation__tag) {
       color: $aquaColor;
     }
     &--home--active > *:not(.navigation__tag) {

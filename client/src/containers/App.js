@@ -6,7 +6,7 @@ import * as actions from '../actions';
 // Components
 import Navbar from './NavbarContainer';
 import Game from './Game';
-import Profile from './Profile';
+import LeaderboardContainer from './LeaderboardContainer';
 import Manual from '../components/main-components/Manual';
 import Footer from '../components/layout/Footer';
 
@@ -28,7 +28,7 @@ class App extends Component {
         <div className="app-container">
           <Navbar></Navbar>
 
-          <Route exact path="/" component={Profile}/>
+          <Route exact path="/" component={LeaderboardContainer}/>
           <Route exact path="/manual" component={Manual} />
           <Route exact path="/game" component={Game}/>
 

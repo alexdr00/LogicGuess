@@ -7,9 +7,9 @@ class Navbar extends Component {
     return (
       <nav className="navigation">
         <NavbarItem
-          icon="user"
-          cssModifier="profile"
-          itemName="Perfil"
+          icon="trophy"
+          cssModifier="leaderboard"
+          itemName="Clasificación"
           route="/" />
 
         <NavbarItem
