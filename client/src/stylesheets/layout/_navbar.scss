@@ -1,6 +1,7 @@
 .navigation {
   @include centerItems;
   flex: 1 1 1;
+  z-index: 50;
 
   position: fixed;
   top: 0;
