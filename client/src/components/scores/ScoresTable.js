@@ -10,7 +10,7 @@ const Table = (props) => {
         scoresList.push(<Score key={score.place} score={score} />)
       });
     } catch (error) {
-      return <h4 style={{ textAlign: 'center' }}>Cargando</h4>
+      return <tr><td style={{ textAlign: 'center' }}>Cargando</td></tr>
     }
 
     return scoresList;

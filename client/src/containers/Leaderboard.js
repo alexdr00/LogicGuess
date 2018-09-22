@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import ScoresFilter from '../components/scores/ScoresFilter';
 import ScoresTable from '../components/scores/ScoresTable';
-import PaginationButton from '../components/scores/PaginationButton';
 import createDataPagination from '../lib/createDataPagination';
+import filterScores from '../lib/filterScores';
+import PaginationButton from '../components/scores/PaginationButton';
+import { connect } from 'react-redux';
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -22,9 +24,8 @@ class Leaderboard extends Component {
 
     this.state = {
       scores: [],
-      scoresToShow: [],
+      scoresPagination: [],
       paginationPlace: 0,
-      filter: '',
     };
 
     this.handleFilterClick = this.handleFilterClick.bind(this);
@@ -33,15 +34,22 @@ class Leaderboard extends Component {
 
   componentDidMount() {
     axios.get('/api/get-scores').then(result => {
-      const scores = createDataPagination(result.data, this.rowsPerPage);
+      const scoresPagination = createDataPagination(result.data, this.rowsPerPage);
+      const scores = result.data;
 
-      this.setState({ scores });
+      this.setState({ scores, scoresPagination });
     });
-
   }
 
   handlePaginationButtonClick(paginationPlace) {
     this.setState({ paginationPlace: paginationPlace - 1 });
+  }
+
+  handleFilterClick(fieldShown) {
+    const scoresToShow = filterScores(fieldShown, this.state.scores, this.props.auth.username);
+    const scoresPagination = createDataPagination(scoresToShow, this.rowsPerPage);
+
+    this.setState({ scoresPagination });
   }
 
   renderPaginationButtons(scores) {
@@ -77,21 +85,27 @@ class Leaderboard extends Component {
     return buttonsFilter;
   }
 
-  handleFilterClick(fieldShown) {
-    this.setState({ filter: fieldShown });
-  }
-
   render() {
     return (
       <div>
         {this.renderFilters()}
 
-        <ScoresTable scores={this.state.scores} pieceToShow={this.state.paginationPlace} />
+        <ScoresTable
+          scores={this.state.scoresPagination}
+          username={this.props.auth.username}
+          pieceToShow={this.state.paginationPlace}
+          filter={this.state.filter}
+          rowsPerPage={this.rowsPerPage}
+        />
 
-        {this.renderPaginationButtons(this.state.scores)}
+        {this.renderPaginationButtons(this.state.scoresPagination)}
       </div>
     )
   }
 }
 
-export default Leaderboard;
+const mapStateToProps = (state) => {
+  return { auth: state.auth };
+}
+
+export default connect(mapStateToProps)(Leaderboard);
