@@ -6,11 +6,17 @@ const Table = (props) => {
     const scoresList = [];
 
     try {
-      scores[props.pieceToShow].forEach(score => {
+      scores[props.page].forEach(score => {
         scoresList.push(<Score key={score.place} score={score} />)
       });
     } catch (error) {
-      return <tr><td style={{ textAlign: 'center' }}>Cargando</td></tr>
+      return (
+        <tr>
+          <td colSpan="5" style={{ textAlign: 'center' }}>
+            No se encontraron resultados
+          </td>
+        </tr>
+      );
     }
 
     return scoresList;

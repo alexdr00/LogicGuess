@@ -11,6 +11,7 @@ class Leaderboard extends Component {
   constructor(props) {
     super(props);
 
+    // Pagination (scores per page)
     this.rowsPerPage = 5;
 
     this.filters = [
@@ -41,15 +42,34 @@ class Leaderboard extends Component {
     });
   }
 
-  handlePaginationButtonClick(paginationPlace) {
-    this.setState({ paginationPlace: paginationPlace - 1 });
+  handlePaginationButtonClick(paginationPlace = 1, currentPlace, scores) {
+    switch (paginationPlace) {
+      case 'previous':
+        if (currentPlace === 0){
+          break;
+        }
+
+        this.setState({ paginationPlace: currentPlace - 1 });
+        break;
+      case 'next':
+        if (currentPlace === scores.length - 1){
+          break;
+        }
+
+        this.setState({ paginationPlace: currentPlace + 1 });
+        break;
+      default:
+        // Since it's an array, it's necessary to subtract one (so it maches with the index which is 0 based).
+        this.setState({ paginationPlace: paginationPlace - 1 });
+    }
   }
 
   handleFilterClick(fieldShown) {
     const scoresToShow = filterScores(fieldShown, this.state.scores, this.props.auth.username);
+    // Create a data pagination of the scores filtered
     const scoresPagination = createDataPagination(scoresToShow, this.rowsPerPage);
 
-    this.setState({ scoresPagination });
+    this.setState({ scoresPagination, paginationPlace: 0 });
   }
 
   renderPaginationButtons(scores) {
@@ -93,12 +113,32 @@ class Leaderboard extends Component {
         <ScoresTable
           scores={this.state.scoresPagination}
           username={this.props.auth.username}
-          pieceToShow={this.state.paginationPlace}
+          page={this.state.paginationPlace}
           filter={this.state.filter}
           rowsPerPage={this.rowsPerPage}
         />
 
+        <button
+          onClick={() => this.handlePaginationButtonClick(
+            'previous',
+            this.state.paginationPlace,
+            this.state.scoresPagination
+          )}
+        >
+          &larr;
+        </button>
+
         {this.renderPaginationButtons(this.state.scoresPagination)}
+
+        <button
+          onClick={() => this.handlePaginationButtonClick(
+            'next',
+            this.state.paginationPlace,
+            this.state.scoresPagination
+          )}
+        >
+          &rarr;
+        </button>
       </div>
     )
   }
