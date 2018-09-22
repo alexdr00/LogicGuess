@@ -1,0 +1,32 @@
+.scores-table {
+  width: 80%;
+  overflow-x: auto;
+  color: $navColor;
+  font-size: 2rem;
+  border-radius: 2px;
+  margin: 5rem auto;
+  color: white;
+
+  table {
+    width: 100%;
+  }
+
+  th {
+    color: $colorWhite;
+  }
+
+  th, td {
+    text-align: center;
+  }
+
+  tr {
+    height: 5rem;
+  }
+
+  tr:nth-child(odd) {
+    background: $lavenderColor;
+  }
+  tr:nth-child(even) {
+    background: $aquaColor;
+  }
+}

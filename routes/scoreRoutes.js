@@ -36,10 +36,14 @@ module.exports = app => {
 
     scores.map((score) => {
       const { attempts, level } = score;
-      const timeElapsed = formatTimeElapsed(score.timeElapsed);
       const levelSpanish = levelToSpanish(level);
+      let timeElapsed = formatTimeElapsed(score.timeElapsed);
       let username = null;
       place += 1;
+
+      if (timeElapsed.toString().length === 2) {
+        timeElapsed = timeElapsed + 's';
+      }
 
       // Match user and their belonging score.
       users.map(user => {

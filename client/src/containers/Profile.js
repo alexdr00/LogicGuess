@@ -42,7 +42,6 @@ class Profile extends Component {
     }
   }
 
-
   render() {
     return (
       <div className="main-content">
