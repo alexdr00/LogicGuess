@@ -1,0 +1,53 @@
+.filters {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-evenly;
+  position: relative;
+  height: 9rem;
+  top: -10px;
+
+
+  &__button {
+    position: relative;
+    top: 0;
+    width: 14.666%;
+    border: none;
+    background-color: $navColor;
+    color: white;
+    font-size: 2rem;
+    border-radius: 0 0 10px 10px;
+    box-shadow: 0 5px 20px $lightGrayColor;
+    cursor: pointer;
+    transition: all .4s;
+
+    &--easy:hover {
+      background-color: $lavenderColor;
+    }
+
+    &--moderate:hover {
+      background-color: $aquaColor;
+    }
+
+    &--hard:hover {
+      background-color: $sunshineColor;
+    }
+
+    &--lottery:hover {
+      background-color: $crimsonSkyColor;
+    }
+
+    &--all:hover,
+    &--userScores:hover {
+      background-color: darken($navColor, 10);
+    }
+  }
+
+  &__button:hover {
+    transform: scale(.95);
+    box-shadow: 0 3px 14px $lightGrayColor;
+  }
+
+  &__button:focus {
+    outline: none;
+  }
+}

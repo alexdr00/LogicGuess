@@ -24,9 +24,10 @@
   }
 
   tr:nth-child(odd) {
-    background: darken($color: $lavenderColor, $amount: 10 );
+    background: darken($color: $navColor, $amount: 8 );
   }
+
   tr:nth-child(even) {
-    background: $lavenderColor;
+    background: $navColor;
   }
 }

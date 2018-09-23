@@ -12,15 +12,15 @@ class Leaderboard extends Component {
     super(props);
 
     // Pagination (scores per page)
-    this.rowsPerPage = 5;
+    this.rowsPerPage = 15;
 
     this.filters = [
+      { buttonLabel: 'Todos', fieldShown: 'all' },
+      { buttonLabel: 'Tus Puntajes', fieldShown: 'userScores' },
       { buttonLabel: 'Fácil', fieldShown: 'easy' },
       { buttonLabel: 'Moderado', fieldShown: 'moderate' },
       { buttonLabel: 'Difícil', fieldShown: 'hard' },
       { buttonLabel: 'Lotería', fieldShown: 'lottery' },
-      { buttonLabel: 'Todos', fieldShown: 'all' },
-      { buttonLabel: 'Tus Puntajes', fieldShown: 'userScores' },
     ];
 
     this.state = {
