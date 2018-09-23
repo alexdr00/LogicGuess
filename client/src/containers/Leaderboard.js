@@ -6,13 +6,15 @@ import createDataPagination from '../lib/createDataPagination';
 import filterScores from '../lib/filterScores';
 import PaginationButton from '../components/scores/PaginationButton';
 import { connect } from 'react-redux';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
 
 class Leaderboard extends Component {
   constructor(props) {
     super(props);
 
     // Pagination (scores per page)
-    this.rowsPerPage = 15;
+    this.rowsPerPage = 10;
 
     this.filters = [
       { buttonLabel: 'Todos', fieldShown: 'all' },
@@ -129,7 +131,7 @@ class Leaderboard extends Component {
               this.state.scoresPagination
             )}
           >
-            &larr;
+            <FontAwesomeIcon icon={['fas', 'angle-left']} />
           </button>
 
           {this.renderPaginationButtons(this.state.scoresPagination)}
@@ -142,7 +144,7 @@ class Leaderboard extends Component {
               this.state.scoresPagination
             )}
           >
-            &rarr;
+            <FontAwesomeIcon icon={['fas', 'angle-right']} />
           </button>
         </div>
       </div>
