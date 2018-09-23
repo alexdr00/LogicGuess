@@ -1,11 +1,8 @@
 {
-  "name": "logicguess",
+  "name": "logicalguess",
   "version": "1.0.0",
-  "description": "A really simple logic game made mainly with React.",
+  "description": "Test your logic",
   "main": "app.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
   "author": "Alexander Dominguez Rendon",
   "license": "MIT",
   "dependencies": {
@@ -13,11 +10,9 @@
     "cookie-session": "^2.0.0-beta.3",
     "esm": "^3.0.84",
     "express": "^4.16.3",
-    "jsonwebtoken": "^8.3.0",
     "mongodb": "^3.1.1",
     "mongoose": "^5.2.14",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "passport-local": "^1.0.0"
   }
 }
