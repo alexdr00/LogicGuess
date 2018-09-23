@@ -108,7 +108,9 @@ class Leaderboard extends Component {
   render() {
     return (
       <div>
-        {this.renderFilters()}
+        <div className="filters">
+          {this.renderFilters()}
+        </div>
 
         <ScoresTable
           scores={this.state.scoresPagination}
@@ -118,27 +120,31 @@ class Leaderboard extends Component {
           rowsPerPage={this.rowsPerPage}
         />
 
-        <button
-          onClick={() => this.handlePaginationButtonClick(
-            'previous',
-            this.state.paginationPlace,
-            this.state.scoresPagination
-          )}
-        >
-          &larr;
-        </button>
+        <div className="pagination">
+          <button
+            className="pagination__button"
+            onClick={() => this.handlePaginationButtonClick(
+              'previous',
+              this.state.paginationPlace,
+              this.state.scoresPagination
+            )}
+          >
+            &larr;
+          </button>
 
-        {this.renderPaginationButtons(this.state.scoresPagination)}
+          {this.renderPaginationButtons(this.state.scoresPagination)}
 
-        <button
-          onClick={() => this.handlePaginationButtonClick(
-            'next',
-            this.state.paginationPlace,
-            this.state.scoresPagination
-          )}
-        >
-          &rarr;
-        </button>
+          <button
+            className="pagination__button"
+            onClick={() => this.handlePaginationButtonClick(
+              'next',
+              this.state.paginationPlace,
+              this.state.scoresPagination
+            )}
+          >
+            &rarr;
+          </button>
+        </div>
       </div>
     )
   }
