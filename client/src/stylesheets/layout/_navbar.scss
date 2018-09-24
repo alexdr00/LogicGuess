@@ -25,7 +25,7 @@
     &--leaderboard:hover .navigation__tag--leaderboard {
       left: 90%;
     }
-    &--home:hover .navigation__tag--home {
+    &--logout:hover .navigation__tag--logout {
       left: 90%;
     }
     &--manual:hover .navigation__tag--manual {
@@ -39,7 +39,7 @@
     &--leaderboard:hover .navigation__icon--leaderboard {
       color: $aquaColor;
     }
-    &--home:hover .navigation__icon--home {
+    &--logout:hover .navigation__icon--logout {
       color: $lavenderColor;
     }
     &--manual:hover .navigation__icon--manual {
@@ -71,7 +71,7 @@
     &--leaderboard {
       background-color: $aquaColor;
     }
-    &--home {
+    &--logout {
       background-color: $lavenderColor;
     }
     &--manual {
@@ -91,7 +91,7 @@
     &--leaderboard--active > *:not(.navigation__tag) {
       color: $aquaColor;
     }
-    &--home--active > *:not(.navigation__tag) {
+    &--logout--active > *:not(.navigation__tag) {
       color: $lavenderColor;
     }
     &--manual--active > *:not(.navigation__tag) {

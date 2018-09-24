@@ -3,6 +3,12 @@ import { NavLink } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class NavbarItem extends Component {
+  renderLogout() {
+    if (this.props.logout) {
+      <a href="/api/logout">h</a>
+    }
+  }
+
   render() {
     return (
       // Nav Item

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import Leaderboard from './Leaderboard';
-import SignInButton from '../components/authentication/SignInButton';
+import RequireLoginPage from '../components/authentication/RequireLoginPage';
 
 class Profile extends Component {
   componentDidMount() {
@@ -21,7 +21,7 @@ class Profile extends Component {
 
   renderSignInButton(user) {
     if (!user) {
-      return <SignInButton />
+      return <RequireLoginPage />
     }
   }
 
