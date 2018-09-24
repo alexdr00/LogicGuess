@@ -1,8 +1,15 @@
 import React from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const SignInButton = () => {
   return (
-    <button className="sign-in-button">Sign In</button>
+    <a href="/auth/google" className="require-login__sign-in-button">
+      <p>Inicia sesión o regístrate con Google</p>
+      <FontAwesomeIcon
+        className="require-login__google-icon"
+        icon={['fab', 'google-plus']}
+      />
+    </a>
   );
 };
 
