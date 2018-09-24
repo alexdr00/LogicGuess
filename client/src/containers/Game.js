@@ -283,7 +283,7 @@ class Game extends Component {
     return <ChooseLevelBox hide />;
   }
 
-  renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess, timeElapsed) {
+  renderVictoryMessage(hasPlayerWon, attempts, level, numberToGuess, timeElapsed, isUserLoggedIn) {
     if (hasPlayerWon) {
       return (
         <VictoryMessageBox
@@ -292,6 +292,7 @@ class Game extends Component {
           numberToGuess={numberToGuess}
           timeElapsed={timeElapsed}
           handleVictoryButtonClick={this.handleVictoryButtonClick}
+          isUserLoggedIn={isUserLoggedIn}
         />
       );
     }
@@ -353,6 +354,7 @@ class Game extends Component {
             this.state.level,
             this.state.numberToGuess,
             this.state.timeElapsed,
+            this.props.auth
           )}
 
           <History

@@ -6,6 +6,9 @@ import defineTheme from '../../lib/defineTheme';
 import formatTimeElapsed from '../../lib/formatTimeElapsed';
 
 const VictoryMessage = (props) => {
+  const saveScoreIcon = props.isUserLoggedIn ? 'save' : 'google-plus';
+  const saveScoreIconType = props.isUserLoggedIn ? 'fas' : 'fab';
+
   return (
     <div className={`victory-message-box ${defineTheme(props.level)}`}>
       <StatisticsPanel
@@ -39,8 +42,8 @@ const VictoryMessage = (props) => {
       <VictoryBoxButton
         label="Guardar puntaje"
         id="saveScore"
-        iconType="fab"
-        icon="google-plus"
+        iconType={saveScoreIconType}
+        icon={saveScoreIcon}
         onClick={props.handleVictoryButtonClick}
       />
     </div>

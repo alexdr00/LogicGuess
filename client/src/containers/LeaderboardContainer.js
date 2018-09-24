@@ -3,24 +3,24 @@ import { connect } from 'react-redux';
 import Leaderboard from './Leaderboard';
 import RequireLoginPage from '../components/authentication/RequireLoginPage';
 
-class Profile extends Component {
-  renderLeaderboard(user) {
-    if (user) {
-      return <Leaderboard />
-    }
-  }
-
+class LeaderboardContainer extends Component {
   renderSignInButton(user) {
     if (!user) {
       return <RequireLoginPage />
     }
   }
 
+  renderLeaderboard(user) {
+    if (user && Object.keys(user).length !== 0) {
+      return <Leaderboard />
+    }
+  }
+
   render() {
     return (
       <div className="main-content">
-        {this.renderLeaderboard(this.props.auth)}
         {this.renderSignInButton(this.props.auth)}
+        {this.renderLeaderboard(this.props.auth)}
       </div>
     );
   }
@@ -30,4 +30,4 @@ const mapStateToProps = (state) => {
   return { auth: state.auth };
 }
 
-export default connect(mapStateToProps)(Profile);
+export default connect(mapStateToProps)(LeaderboardContainer);
