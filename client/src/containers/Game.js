@@ -321,8 +321,6 @@ class Game extends Component {
     return (
       <div className="main-content">
         <div className="game">
-          {console.log(this.state.numberToGuess)}
-
           {this.renderSubmittedScoreMessage(this.state.isMessageShown)}
 
           {this.renderChooseLevelBox()}
@@ -372,7 +370,6 @@ class Game extends Component {
             className="confetti"
             config={ this.confettiConfig }
           />
-
         </div>
       </div>
     );

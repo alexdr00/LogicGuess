@@ -1,10 +1,8 @@
-// import calculateNumberOfPages from './calculateNumberOfPages';
-
 /**
- * Divides data in order to create a pagination for the scores.
+ * Divides data in order to create a pagination for the scores table (leaderboard).
  * @param {Array} data - Array of objects. Each object is a score.
  * @param {Integer} rowsPerPage - Number of rows each page will have
- * @return {Array} Array of objects. Each object has a key as an index.
+ * @return {Array} Array of objects. Each object has a key as index.
  * That index represents its place in the pagination.
  */
 const createDataPagination = (data, rowsPerPage) => {

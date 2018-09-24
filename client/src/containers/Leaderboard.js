@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import { connect } from 'react-redux';
 import ScoresFilter from '../components/scores/ScoresFilter';
 import ScoresTable from '../components/scores/ScoresTable';
+import NextPreviousButton from '../components/scores/NextPreviousButton';
+import PaginationButton from '../components/scores/PaginationButton';
 import createDataPagination from '../lib/createDataPagination';
 import filterScores from '../lib/filterScores';
-import PaginationButton from '../components/scores/PaginationButton';
-import { connect } from 'react-redux';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 class Leaderboard extends Component {
   constructor(props) {
@@ -26,6 +26,7 @@ class Leaderboard extends Component {
 
     this.state = {
       scores: [],
+      // The sames scores but in pagination format
       scoresPagination: [],
       paginationPlace: 0,
     };
@@ -35,6 +36,7 @@ class Leaderboard extends Component {
   }
 
   componentDidMount() {
+    // Get the scores and store them in local state
     axios.get('/api/get-scores').then(result => {
       const scoresPagination = createDataPagination(result.data, this.rowsPerPage);
       const scores = result.data;
@@ -53,6 +55,7 @@ class Leaderboard extends Component {
         this.setState({ paginationPlace: currentPlace - 1 });
         break;
       case 'next':
+        // last place
         if (currentPlace === scores.length - 1){
           break;
         }
@@ -67,12 +70,13 @@ class Leaderboard extends Component {
 
   handleFilterClick(fieldShown) {
     const scoresToShow = filterScores(fieldShown, this.state.scores, this.props.auth.username);
-    // Create a data pagination of the filtered scores
+    // From the resulting filtration, create the data pagination.
     const scoresPagination = createDataPagination(scoresToShow, this.rowsPerPage);
 
     this.setState({ scoresPagination, paginationPlace: 0 });
   }
 
+  // Render as many button as pagination pages.
   renderPaginationButtons(scores) {
     const paginationButtons = [];
 
@@ -89,6 +93,7 @@ class Leaderboard extends Component {
     return paginationButtons;
   }
 
+  // Filter buttons
   renderFilters() {
     const buttonsFilter = [];
 
@@ -122,29 +127,21 @@ class Leaderboard extends Component {
         />
 
         <div className="pagination">
-          <button
-            className="pagination__button"
-            onClick={() => this.handlePaginationButtonClick(
-              'previous',
-              this.state.paginationPlace,
-              this.state.scoresPagination
-            )}
-          >
-            <FontAwesomeIcon icon={['fas', 'angle-left']} />
-          </button>
+          <NextPreviousButton
+            previousOrNext={'previous'}
+            paginationPlace={this.state.paginationPlace}
+            scoresPagination={this.state.scoresPagination}
+            onClick={this.handlePaginationButtonClick}
+          />
 
           {this.renderPaginationButtons(this.state.scoresPagination)}
 
-          <button
-            className="pagination__button"
-            onClick={() => this.handlePaginationButtonClick(
-              'next',
-              this.state.paginationPlace,
-              this.state.scoresPagination
-            )}
-          >
-            <FontAwesomeIcon icon={['fas', 'angle-right']} />
-          </button>
+          <NextPreviousButton
+            previousOrNext={'next'}
+            paginationPlace={this.state.paginationPlace}
+            scoresPagination={this.state.scoresPagination}
+            onClick={this.handlePaginationButtonClick}
+          />
         </div>
       </div>
     )
