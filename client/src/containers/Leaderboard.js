@@ -8,7 +8,6 @@ import PaginationButton from '../components/scores/PaginationButton';
 import { connect } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-
 class Leaderboard extends Component {
   constructor(props) {
     super(props);
@@ -68,7 +67,7 @@ class Leaderboard extends Component {
 
   handleFilterClick(fieldShown) {
     const scoresToShow = filterScores(fieldShown, this.state.scores, this.props.auth.username);
-    // Create a data pagination of the scores filtered
+    // Create a data pagination of the filtered scores
     const scoresPagination = createDataPagination(scoresToShow, this.rowsPerPage);
 
     this.setState({ scoresPagination, paginationPlace: 0 });

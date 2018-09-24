@@ -2,6 +2,7 @@
 import React, { Component } from "react";
 import Confetti from "react-dom-confetti";
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 // Components
 import ChooseLevelBox from "../components/main-components/ChooseLevel";
@@ -10,6 +11,7 @@ import VictoryMessageBox from "../components/main-components/VictoryMessageBox";
 import MainGameContainer from "../components/main-components/MainGameContainer";
 import Help from "../components/help/Help";
 import Timer from "../components/timer/Timer";
+import SuccessMessage from "../components/message/SuccessMessage";
 
 // Dependencies
 import * as validate from "../lib/inputValidations";
@@ -60,7 +62,36 @@ class Game extends Component {
       error: null,
       helpLabel: '',
       timeElapsed: 0,
+      isMessageShown: null,
     };
+  }
+
+  componentDidMount() {
+    if (window.sessionStorage.scoreData) {
+      const scoreData = JSON.parse(window.sessionStorage.scoreData);
+      window.sessionStorage.clear();
+      axios.post('/api/submit-score', scoreData);
+
+      this.setState({ isMessageShown: true }, () => this.hideMessage());
+    }
+  }
+
+  hideMessage() {
+    setTimeout(() => {
+      this.setState({ isMessageShown: false });
+    }, 5000);
+  }
+
+  renderSubmittedScoreMessage(isShown) {
+    if (isShown) {
+      return <SuccessMessage isShown={true} />
+    }
+
+    // If isShown is false hide with a nice effect
+    // If isShown is null don't show anything at all
+    if (isShown !== null) {
+      return <SuccessMessage isShown={false} />
+    }
   }
 
   /**
@@ -226,14 +257,17 @@ class Game extends Component {
         timeElapsed: this.state.timeElapsed,
       }
 
+      // Save in session storage, so when the player is redirected,
+      // the score data won't be lost.
       window.sessionStorage.setItem('scoreData', JSON.stringify(scoreData));
 
-      if (this.props.auth._id) {
-        return window.location.replace('/');
+      if (this.props.auth) {
+        // If user is signed in, play again. The score data will be saved in this component.
+        return window.location.reload();
       }
 
+      // otherwise, redirect to sign in
       window.location.replace('/auth/google');
-
     }
   }
 
@@ -287,6 +321,8 @@ class Game extends Component {
       <div className="main-content">
         <div className="game">
           {console.log(this.state.numberToGuess)}
+
+          {this.renderSubmittedScoreMessage(this.state.isMessageShown)}
 
           {this.renderChooseLevelBox()}
 

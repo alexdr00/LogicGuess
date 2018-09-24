@@ -1,18 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import axios from 'axios';
 import Leaderboard from './Leaderboard';
 import RequireLoginPage from '../components/authentication/RequireLoginPage';
 
 class Profile extends Component {
-  componentDidMount() {
-    if (window.sessionStorage.scoreData) {
-      const scoreData = JSON.parse(window.sessionStorage.scoreData);
-      window.sessionStorage.clear();
-      axios.post('/api/submit-score', scoreData);
-    }
-  }
-
   renderLeaderboard(user) {
     if (user) {
       return <Leaderboard />

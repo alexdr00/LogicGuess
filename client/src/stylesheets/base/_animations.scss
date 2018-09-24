@@ -116,4 +116,24 @@
 
 }
 
+@keyframes showSuccessMessage {
+  0% {
+    top: -500px;
+  }
+
+  100% {
+    top: 0;
+  }
+}
+
+@keyframes hideSuccessMessage {
+  0% {
+    top: 0;
+  }
+
+  100% {
+    top: -500px;
+  }
+}
+
 

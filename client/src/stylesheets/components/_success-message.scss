@@ -1,0 +1,23 @@
+.success-message {
+  @include centerItems;
+
+  position: absolute;
+  top: 0;
+  right: 0;
+  left: 0;
+  height: 6rem;
+  background-color: $navColor;
+  color: $colorWhite;
+  font-size: 2rem;
+  text-align: center;
+  animation-duration: 1s;
+  animation-fill-mode: forwards;
+
+  &--shown {
+    animation-name: showSuccessMessage;
+  }
+
+  &--hidden {
+    animation-name: hideSuccessMessage;
+  }
+}
