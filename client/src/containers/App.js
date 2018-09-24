@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 import * as actions from '../actions';
 
 // Components
-import Navbar from './NavbarContainer';
+import Navbar from '../components/layout/NavbarContainer';
 import Game from './Game';
 import LeaderboardContainer from './LeaderboardContainer';
 import Manual from '../components/main-components/Manual';
@@ -26,7 +26,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div className="app-container">
-          <Navbar></Navbar>
+          <Navbar isUserLoggedIn={this.props.auth} />
 
           <Route exact path="/" component={LeaderboardContainer}/>
           <Route exact path="/manual" component={Manual} />
@@ -38,5 +38,7 @@ class App extends Component {
     );
   }
 }
-
-export default connect(null, actions)(App);
+const mapStateToProps = (state) => {
+  return { auth: state.auth };
+}
+export default connect(mapStateToProps, actions)(App);
