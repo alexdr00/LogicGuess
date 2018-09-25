@@ -1,10 +1,10 @@
+require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
-require('dotenv').config();
 
 // esm to have to have ability of requiring client modules.
 require = require("esm")(module);
@@ -53,6 +53,6 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const PORT = Number(process.env.PORT) || 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => console.log(`Server Running!! (port: ${PORT})`));
