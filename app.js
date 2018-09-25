@@ -4,6 +4,7 @@ const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
 const keys = require('./config/keys');
+require('dotenv').config();
 
 // esm to have to have ability of requiring client modules.
 require = require("esm")(module);
