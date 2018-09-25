@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const bodyParser = require('body-parser');
 const cookieSession = require('cookie-session');
-const keys = require('./config/dev');
+const keys = require('./config/keys');
 
 // esm to have to have ability of requiring client modules.
 require = require("esm")(module);
@@ -43,4 +43,15 @@ require('./routes/authRoutes')(app);
 require('./routes/scoreRoutes')(app);
 require('./routes/userRoutes')(app);
 
-app.listen(5000, () => console.log(`Server Running!! (port: ${5000})`));
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+
+  const path = require('path');
+  app.get('*', (req, res) => {
+    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+  });
+}
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server Running!! (port: ${PORT})`));
